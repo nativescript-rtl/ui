@@ -38,10 +38,10 @@
         "email": "xlmnxp@outlook.sa"
     },
     "bugs": {
-        "url": "https://github.com/xlmnxp/nativescript-rtl/gridlayout"
+        "url": "https://github.com/nativescript-rtl/ui"
     },
     "license": "MIT",
-    "homepage": "https://github.com/xlmnxp/nativescript-rtl",
+    "homepage": "https://github.com/nativescript-rtl",
     "readmeFilename": "README.md",
     "devDependencies": {
         "tns-core-modules": "^4.2.0",
