@@ -1,0 +1,11 @@
+*.map
+*.ts
+!*.d.ts
+tsconfig.json
+scripts/*
+platforms/android/*
+demo/**/*
+demo
+!platforms/android/include.gradle
+!platforms/android/*.aar
+!platforms/android/*
