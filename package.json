@@ -28,7 +28,7 @@
       "demo.ios": "npm run tsc && cd ../demo && tns run ios --syncAllFiles --emulator",
       "demo.android": "npm run tsc && cd ../demo && tns run android --syncAllFiles --emulator",
       "demo.reset": "cd ../demo && npx rimraf -- hooks node_modules platforms package-lock.json",
-      "prepare": "npm run build && cd ../demo && tns plugin remove @nativescript-rtl/ui && tns plugin add ../ui",
+      "prepare": "npm run build && cd ../demo && npm uninstall @nativescript-rtl/ui && npm install ../ui",
       "clean": "npm run demo.reset && npx rimraf -- node_modules package-lock.json && npm i",
       "ci.tslint": "npm i && tslint '**/*.ts' --config '../tslint.json' --exclude '**/node_modules/**'",
       "prepack": "npm run build.native"
