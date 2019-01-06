@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var grid_layout_1 = require("tns-core-modules/ui/layouts/grid-layout");
+var wrap_layout_1 = require("tns-core-modules/ui/layouts/wrap-layout");
 var Common = (function (_super) {
     __extends(Common, _super);
     function Common() {
@@ -9,6 +9,6 @@ var Common = (function (_super) {
         return _this;
     }
     return Common;
-}(grid_layout_1.GridLayout));
+}(wrap_layout_1.WrapLayout));
 exports.Common = Common;
-//# sourceMappingURL=grid-layout.common.js.map
+//# sourceMappingURL=wrap-layout.common.js.map

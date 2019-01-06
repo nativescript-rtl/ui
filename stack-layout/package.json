@@ -1,8 +1,8 @@
 {
-    "name": "grid-layout",
+    "name": "stack-layout",
     "version": "1.0.0",
     "description": "Add right-to-left support to the NativeScript framework.",
-    "main": "grid-layout",
+    "main": "stack-layout",
     "typings": "index.d.ts",
     "nativescript": {
         "platforms": {

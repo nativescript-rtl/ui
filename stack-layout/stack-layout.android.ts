@@ -1,7 +1,7 @@
-import { Common } from "./grid-layout.common";
+import { Common } from "./stack-layout.common";
 import { View } from "tns-core-modules/ui/page/page";
 
-export class GridLayout extends Common {
+export class StackLayout extends Common {
     createNativeView(): object {
         let view: any = super.createNativeView();
         if (this.isRtl) {
