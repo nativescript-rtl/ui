@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var grid_layout_common_1 = require("./grid-layout.common");
-var GridLayout = (function (_super) {
-    __extends(GridLayout, _super);
-    function GridLayout() {
+var stack_layout_common_1 = require("./stack-layout.common");
+var StackLayout = (function (_super) {
+    __extends(StackLayout, _super);
+    function StackLayout() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    GridLayout.prototype.createNativeView = function () {
+    StackLayout.prototype.createNativeView = function () {
         var _this = this;
         var view = _super.prototype.createNativeView.call(this);
         if (this.isRtl) {
@@ -26,7 +26,7 @@ var GridLayout = (function (_super) {
         }
         return view;
     };
-    return GridLayout;
-}(grid_layout_common_1.Common));
-exports.GridLayout = GridLayout;
-//# sourceMappingURL=grid-layout.android.js.map
+    return StackLayout;
+}(stack_layout_common_1.Common));
+exports.StackLayout = StackLayout;
+//# sourceMappingURL=stack-layout.android.js.map

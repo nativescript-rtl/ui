@@ -15,7 +15,6 @@ var WrapLayout = (function (_super) {
                 for (var viewIndex = 0; viewIndex < _this["getChildrenCount"](); viewIndex++) {
                     var NSView = _this["getChildAt"](viewIndex);
                     var isRtl = NSView["isRtl"] || false;
-                    console.log(NSView.typeName + " - " + isRtl);
                     if (isRtl) {
                         NSView.nativeView.setRotationY(0);
                     }

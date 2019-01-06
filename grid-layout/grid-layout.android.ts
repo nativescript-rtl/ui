@@ -10,7 +10,6 @@ export class GridLayout extends Common {
                 for (let viewIndex = 0; viewIndex < this["getChildrenCount"](); viewIndex++) {
                     let NSView: View = this["getChildAt"](viewIndex);
                     let isRtl: boolean = NSView["isRtl"] || false;
-                    console.log(NSView.typeName + " - " + isRtl);
                     if (isRtl) {
                         NSView.nativeView.setRotationY(0);
                     } else {

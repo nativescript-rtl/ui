@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var grid_layout_common_1 = require("./grid-layout.common");
-var GridLayout = (function (_super) {
-    __extends(GridLayout, _super);
-    function GridLayout() {
+var absolute_layout_common_1 = require("./absolute-layout.common");
+var AbsoluteLayout = (function (_super) {
+    __extends(AbsoluteLayout, _super);
+    function AbsoluteLayout() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    GridLayout.prototype.createNativeView = function () {
+    AbsoluteLayout.prototype.createNativeView = function () {
         var _this = this;
         var view = _super.prototype.createNativeView.call(this);
         if (this.isRtl) {
@@ -26,7 +26,7 @@ var GridLayout = (function (_super) {
         }
         return view;
     };
-    return GridLayout;
-}(grid_layout_common_1.Common));
-exports.GridLayout = GridLayout;
-//# sourceMappingURL=grid-layout.android.js.map
+    return AbsoluteLayout;
+}(absolute_layout_common_1.Common));
+exports.AbsoluteLayout = AbsoluteLayout;
+//# sourceMappingURL=absolute-layout.android.js.map
