@@ -6,12 +6,30 @@ var GridLayout = (function (_super) {
     function GridLayout() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    GridLayout.prototype.createNativeView = function () {
+    GridLayout.prototype.initNativeView = function () {
+        this._updateDirection();
+    };
+    GridLayout.prototype[grid_layout_common_1.isRtlProperty.setNative] = function (isRtl) {
+        this.isRtl = isRtl;
+        this._updateDirection();
+    };
+    GridLayout.prototype.addChild = function (view) {
+        _super.prototype.addChild.call(this, view);
+        if (view.nativeViewProtected) {
+            this._updateDirection();
+        }
+    };
+    GridLayout.prototype.removeChild = function (view) {
+        _super.prototype.removeChild.call(this, view);
+        if (view.nativeViewProtected) {
+            this._updateDirection();
+        }
+    };
+    GridLayout.prototype._updateDirection = function () {
         var _this = this;
-        var view = _super.prototype.createNativeView.call(this);
-        if (this.isRtl) {
-            view.setRotationY(180);
-            setTimeout(function () {
+        setTimeout(function () {
+            if (_this.isRtl) {
+                _this.nativeViewProtected.setRotationY(180);
                 for (var viewIndex = 0; viewIndex < _this["getChildrenCount"](); viewIndex++) {
                     var NSView = _this["getChildAt"](viewIndex);
                     var isRtl = NSView["isRtl"] || false;
@@ -22,31 +40,13 @@ var GridLayout = (function (_super) {
                         NSView.nativeView.setRotationY(180);
                     }
                 }
-            }, 1);
-        }
-        return view;
-    };
-    GridLayout.prototype.addChild = function (view) {
-        var _this = this;
-        _super.prototype.addChild.call(this, view);
-        setTimeout(function () {
-            if (_this.isRtl) {
-                view.nativeView.setRotationY(180);
             }
             else {
-                view.nativeView.setRotationY(0);
-            }
-        }, 1);
-    };
-    GridLayout.prototype.removeChild = function (view) {
-        var _this = this;
-        _super.prototype.removeChild.call(this, view);
-        setTimeout(function () {
-            if (_this.isRtl) {
-                view.nativeView.setRotationY(180);
-            }
-            else {
-                view.nativeView.setRotationY(0);
+                _this.nativeViewProtected.setRotationY(0);
+                for (var viewIndex = 0; viewIndex < _this["getChildrenCount"](); viewIndex++) {
+                    var NSView = _this["getChildAt"](viewIndex);
+                    NSView.nativeView.setRotationY(0);
+                }
             }
         }, 1);
     };

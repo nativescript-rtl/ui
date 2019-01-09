@@ -18,7 +18,7 @@ tns plugin add @nativescript-rtl/ui
 ## Properties
 | Name | Default | Description |
 | :-- | :----- | :--------- |
-| isRtl | `true` | `isRtl` using to set layout direction by default is `true` that mean layout `RTL` but you can change it to `false` that change layout to `LTR` |
+| isRtl | `true` | `isRtl` use to set layout direction by default is `true` that mean layout `RTL` but you can change it to `false` that change layout to `LTR` |
 ## How to use
 declare plugin in XML then use it.
 ```xml

@@ -5,5 +5,5 @@ export declare class WrapLayout extends Common {
     initNativeView(): void;
     addChild(view: View): void;
     removeChild(view: View): void;
-    _updateDirection(): void;
+    private _updateDirection();
 }

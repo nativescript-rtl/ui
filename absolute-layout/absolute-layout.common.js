@@ -1,14 +1,28 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var absolute_layout_1 = require("tns-core-modules/ui/layouts/absolute-layout");
+var properties_1 = require("tns-core-modules/ui/core/properties/properties");
 var Common = (function (_super) {
     __extends(Common, _super);
     function Common() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.isRtl = true;
-        return _this;
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     return Common;
 }(absolute_layout_1.AbsoluteLayout));
 exports.Common = Common;
+exports.isRtlProperty = new properties_1.Property({
+    name: "isRtl",
+    defaultValue: true,
+    valueConverter: function (v) {
+        var lowercase = (v + "").toLowerCase();
+        if (lowercase === "true") {
+            return true;
+        }
+        else if (lowercase === "false") {
+            return false;
+        }
+        throw new Error("Invalid boolean: " + v);
+    }
+});
+exports.isRtlProperty.register(Common);
 //# sourceMappingURL=absolute-layout.common.js.map

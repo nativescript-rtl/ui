@@ -6,12 +6,30 @@ var AbsoluteLayout = (function (_super) {
     function AbsoluteLayout() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    AbsoluteLayout.prototype.createNativeView = function () {
+    AbsoluteLayout.prototype.initNativeView = function () {
+        this._updateDirection();
+    };
+    AbsoluteLayout.prototype[absolute_layout_common_1.isRtlProperty.setNative] = function (isRtl) {
+        this.isRtl = isRtl;
+        this._updateDirection();
+    };
+    AbsoluteLayout.prototype.addChild = function (view) {
+        _super.prototype.addChild.call(this, view);
+        if (view.nativeViewProtected) {
+            this._updateDirection();
+        }
+    };
+    AbsoluteLayout.prototype.removeChild = function (view) {
+        _super.prototype.removeChild.call(this, view);
+        if (view.nativeViewProtected) {
+            this._updateDirection();
+        }
+    };
+    AbsoluteLayout.prototype._updateDirection = function () {
         var _this = this;
-        var view = _super.prototype.createNativeView.call(this);
-        if (this.isRtl) {
-            view.setRotationY(180);
-            setTimeout(function () {
+        setTimeout(function () {
+            if (_this.isRtl) {
+                _this.nativeViewProtected.setRotationY(180);
                 for (var viewIndex = 0; viewIndex < _this["getChildrenCount"](); viewIndex++) {
                     var NSView = _this["getChildAt"](viewIndex);
                     var isRtl = NSView["isRtl"] || false;
@@ -22,31 +40,13 @@ var AbsoluteLayout = (function (_super) {
                         NSView.nativeView.setRotationY(180);
                     }
                 }
-            }, 1);
-        }
-        return view;
-    };
-    AbsoluteLayout.prototype.addChild = function (view) {
-        var _this = this;
-        _super.prototype.addChild.call(this, view);
-        setTimeout(function () {
-            if (_this.isRtl) {
-                view.nativeView.setRotationY(180);
             }
             else {
-                view.nativeView.setRotationY(0);
-            }
-        }, 1);
-    };
-    AbsoluteLayout.prototype.removeChild = function (view) {
-        var _this = this;
-        _super.prototype.removeChild.call(this, view);
-        setTimeout(function () {
-            if (_this.isRtl) {
-                view.nativeView.setRotationY(180);
-            }
-            else {
-                view.nativeView.setRotationY(0);
+                _this.nativeViewProtected.setRotationY(0);
+                for (var viewIndex = 0; viewIndex < _this["getChildrenCount"](); viewIndex++) {
+                    var NSView = _this["getChildAt"](viewIndex);
+                    NSView.nativeView.setRotationY(0);
+                }
             }
         }, 1);
     };

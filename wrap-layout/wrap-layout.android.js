@@ -11,8 +11,6 @@ var WrapLayout = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     WrapLayout.prototype.initNativeView = function () {
-        console.dir(this);
-        console.dir(this.isRtl);
         this._updateDirection();
     };
     WrapLayout.prototype[wrap_layout_common_1.isRtlProperty.setNative] = function (isRtl) {
@@ -48,7 +46,6 @@ var WrapLayout = (function (_super) {
                 }
             }
             else {
-                console.log(_this["getChildrenCount"]());
                 _this.nativeViewProtected.setRotationY(0);
                 for (var viewIndex = 0; viewIndex < _this["getChildrenCount"](); viewIndex++) {
                     var NSView = _this["getChildAt"](viewIndex);
