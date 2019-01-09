@@ -26,6 +26,30 @@ var DockLayout = (function (_super) {
         }
         return view;
     };
+    DockLayout.prototype.addChild = function (view) {
+        var _this = this;
+        _super.prototype.addChild.call(this, view);
+        setTimeout(function () {
+            if (_this.isRtl) {
+                view.nativeView.setRotationY(180);
+            }
+            else {
+                view.nativeView.setRotationY(0);
+            }
+        }, 1);
+    };
+    DockLayout.prototype.removeChild = function (view) {
+        var _this = this;
+        _super.prototype.removeChild.call(this, view);
+        setTimeout(function () {
+            if (_this.isRtl) {
+                view.nativeView.setRotationY(180);
+            }
+            else {
+                view.nativeView.setRotationY(0);
+            }
+        }, 1);
+    };
     return DockLayout;
 }(dock_layout_common_1.Common));
 exports.DockLayout = DockLayout;

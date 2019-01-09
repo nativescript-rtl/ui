@@ -15,8 +15,12 @@ tns plugin add @nativescript-rtl/ui
 | <img alt="screenshot 4" src="https://raw.githubusercontent.com/nativescript-rtl/ui/master/screenshots/screenshot-ltr-4.png" width="170"> | `StackLayout` | <img alt="screenshot 4" src="https://raw.githubusercontent.com/nativescript-rtl/ui/master/screenshots/screenshot-rtl-4.png" width="170"> |
 | <img alt="screenshot 5" src="https://raw.githubusercontent.com/nativescript-rtl/ui/master/screenshots/screenshot-ltr-5.png" width="170"> | `WrapLayout` | <img alt="screenshot 5" src="https://raw.githubusercontent.com/nativescript-rtl/ui/master/screenshots/screenshot-rtl-5.png" width="170"> |
 
+## Properties
+| Name | Default | Description |
+| :-- | :----- | :--------- |
+| isRtl | `true` | `isRtl` using to set layout direction by default is `true` that mean layout `RTL` but you can change it to `false` that change layout to `LTR` |
 ## How to use
-declare plugin in XML then use it
+declare plugin in XML then use it.
 ```xml
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:rtl="@nativescript-rtl/ui">
   <rtl:WrapLayout orientation="horizontal" width="210" height="210" backgroundColor="lightgray">

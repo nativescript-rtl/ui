@@ -26,6 +26,24 @@ var StackLayout = (function (_super) {
         }
         return view;
     };
+    StackLayout.prototype.addChild = function (view) {
+        _super.prototype.addChild.call(this, view);
+        if (this.isRtl) {
+            view.nativeView.setRotationY(180);
+        }
+        else {
+            view.nativeView.setRotationY(0);
+        }
+    };
+    StackLayout.prototype.removeChild = function (view) {
+        _super.prototype.removeChild.call(this, view);
+        if (this.isRtl) {
+            view.nativeView.setRotationY(180);
+        }
+        else {
+            view.nativeView.setRotationY(0);
+        }
+    };
     return StackLayout;
 }(stack_layout_common_1.Common));
 exports.StackLayout = StackLayout;
