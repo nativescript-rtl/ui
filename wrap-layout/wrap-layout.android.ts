@@ -4,7 +4,15 @@ export * from "./wrap-layout.common";
 
 export class WrapLayout extends Common {
   public initNativeView(): void {
+    super.initNativeView();
     this._updateDirection();
+  }
+
+  [isRtlProperty.getDefault](): boolean {
+    let ViewCompat = android.support.v4.view.ViewCompat;
+    let isRtl = ViewCompat.getLayoutDirection(this.nativeViewProtected) === ViewCompat.LAYOUT_DIRECTION_RTL;
+    console.log(isRtl);
+    return isRtl;
   }
 
   [isRtlProperty.setNative](isRtl: boolean): void {

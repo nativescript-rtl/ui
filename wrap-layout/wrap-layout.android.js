@@ -11,7 +11,14 @@ var WrapLayout = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     WrapLayout.prototype.initNativeView = function () {
+        _super.prototype.initNativeView.call(this);
         this._updateDirection();
+    };
+    WrapLayout.prototype[wrap_layout_common_1.isRtlProperty.getDefault] = function () {
+        var ViewCompat = android.support.v4.view.ViewCompat;
+        var isRtl = ViewCompat.getLayoutDirection(this.nativeViewProtected) === ViewCompat.LAYOUT_DIRECTION_RTL;
+        console.log(isRtl);
+        return isRtl;
     };
     WrapLayout.prototype[wrap_layout_common_1.isRtlProperty.setNative] = function (isRtl) {
         this.isRtl = isRtl;

@@ -3,6 +3,7 @@ import { View } from "tns-core-modules/ui/page/page";
 
 export class AbsoluteLayout extends Common {
   public initNativeView(): void {
+    super.initNativeView();
     this._updateDirection();
   }
 

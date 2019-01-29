@@ -7,6 +7,7 @@ var DockLayout = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     DockLayout.prototype.initNativeView = function () {
+        _super.prototype.initNativeView.call(this);
         this._updateDirection();
     };
     DockLayout.prototype[dock_layout_common_1.isRtlProperty.setNative] = function (isRtl) {

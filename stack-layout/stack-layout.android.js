@@ -7,6 +7,7 @@ var StackLayout = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     StackLayout.prototype.initNativeView = function () {
+        _super.prototype.initNativeView.call(this);
         this._updateDirection();
     };
     StackLayout.prototype[stack_layout_common_1.isRtlProperty.setNative] = function (isRtl) {
