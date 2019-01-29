@@ -1,3 +1,8 @@
-import { Common } from './dock-layout.common';
+import { Common } from "./dock-layout.common";
+import { View } from "tns-core-modules/ui/core/view/view";
 export declare class DockLayout extends Common {
+    initNativeView(): void;
+    addChild(view: View): void;
+    removeChild(view: View): void;
+    private _updateDirection();
 }
