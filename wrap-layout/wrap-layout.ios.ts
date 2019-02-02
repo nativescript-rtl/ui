@@ -27,11 +27,12 @@ export class WrapLayout extends Common {
   }
 
   private _updateDirection(): void {
+    let ZeroRotation = CGAffineTransformMakeRotation(0);
+    let RotationInYAxis180Deg = CATransform3DRotate(CATransform3DIdentity, (180 * Math.PI) / 180.0, 0.0, 1.0, 0.0);
+
     setTimeout(() => {
       if (this.isRtl) {
-        this.nativeViewProtected.transform = CGAffineTransformMakeRotation(
-          (180.0 * Math.PI) / 180.0
-        );
+        this.nativeViewProtected.layer.transform = RotationInYAxis180Deg;
         for (
           let viewIndex = 0;
           viewIndex < this["getChildrenCount"]();
@@ -40,11 +41,9 @@ export class WrapLayout extends Common {
           let NSView: View = this["getChildAt"](viewIndex);
           let isRtl: boolean = NSView["isRtl"] || false;
           if (isRtl) {
-            NSView.nativeView.transform = CGAffineTransformMakeRotation(0);
+            NSView.nativeView.layer.transform = ZeroRotation;
           } else {
-            NSView.nativeView.transform = CGAffineTransformMakeRotation(
-              (180.0 * Math.PI) / 180.0
-            );
+            NSView.nativeView.layer.transform = RotationInYAxis180Deg;
           }
         }
       } else {
@@ -55,7 +54,7 @@ export class WrapLayout extends Common {
           viewIndex++
         ) {
           let NSView: View = this["getChildAt"](viewIndex);
-          NSView.nativeView.transform = CGAffineTransformMakeRotation(0);
+          NSView.nativeView.layer.transform = ZeroRotation;
         }
       }
     }, 1);
