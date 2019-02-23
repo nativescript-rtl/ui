@@ -1,4 +1,4 @@
-import { Common, isRtlProperty } from "./wrap-layout.common";
+import { Common, isRtlProperty, directionProperty } from "./wrap-layout.common";
 import { View } from "tns-core-modules/ui/page/page";
 export * from "./wrap-layout.common";
 
@@ -8,17 +8,21 @@ export class WrapLayout extends Common {
     this._updateDirection();
   }
 
-  [isRtlProperty.getDefault](): boolean {
-    let ViewCompat = android.support.v4.view.ViewCompat;
-    let isRtl = ViewCompat.getLayoutDirection(this.nativeViewProtected) === ViewCompat.LAYOUT_DIRECTION_RTL;
-    console.log(isRtl);
-    return isRtl;
-  }
-
   [isRtlProperty.setNative](isRtl: boolean): void {
     this.isRtl = isRtl;
     this._updateDirection();
   }
+
+  [directionProperty.setNative](direction: string) {
+    if (direction === "rtl") {
+      this.isRtl = true;
+    } else if (direction === "ltr") {
+      this.isRtl = false;
+    }
+
+    this._updateDirection();
+  }
+
 
   public addChild(view: View): void {
     super.addChild(view);

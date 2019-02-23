@@ -1,4 +1,8 @@
-import { Common, isRtlProperty } from "./absolute-layout.common";
+import {
+  Common,
+  isRtlProperty,
+  directionProperty
+} from "./absolute-layout.common";
 import { View } from "tns-core-modules/ui/page/page";
 
 export class AbsoluteLayout extends Common {
@@ -9,6 +13,16 @@ export class AbsoluteLayout extends Common {
 
   [isRtlProperty.setNative](isRtl: boolean): void {
     this.isRtl = isRtl;
+    this._updateDirection();
+  }
+
+  [directionProperty.setNative](direction: string) {
+    if (direction === "rtl") {
+      this.isRtl = true;
+    } else if (direction === "ltr") {
+      this.isRtl = false;
+    }
+
     this._updateDirection();
   }
 

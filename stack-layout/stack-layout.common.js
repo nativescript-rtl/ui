@@ -25,4 +25,17 @@ exports.isRtlProperty = new properties_1.Property({
     }
 });
 exports.isRtlProperty.register(Common);
+exports.directionProperty = new properties_1.CssProperty({
+    name: "direction",
+    cssName: "direction",
+    defaultValue: "rtl",
+    valueConverter: function (value) {
+        var val = value.toLocaleLowerCase();
+        if (val === "rtl" || val === "ltr") {
+            return val;
+        }
+        throw new Error("Invalid string: " + val);
+    }
+});
+exports.directionProperty.register(properties_1.Style);
 //# sourceMappingURL=stack-layout.common.js.map

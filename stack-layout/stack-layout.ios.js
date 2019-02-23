@@ -28,17 +28,19 @@ var StackLayout = (function (_super) {
     };
     StackLayout.prototype._updateDirection = function () {
         var _this = this;
+        var ZeroRotation = CGAffineTransformMakeRotation(0);
+        var RotationInYAxis180Deg = CATransform3DRotate(CATransform3DIdentity, (180 * Math.PI) / 180.0, 0.0, 1.0, 0.0);
         setTimeout(function () {
             if (_this.isRtl) {
-                _this.nativeViewProtected.transform = CGAffineTransformMakeRotation((180.0 * Math.PI) / 180.0);
+                _this.nativeViewProtected.layer.transform = RotationInYAxis180Deg;
                 for (var viewIndex = 0; viewIndex < _this["getChildrenCount"](); viewIndex++) {
                     var NSView = _this["getChildAt"](viewIndex);
                     var isRtl = NSView["isRtl"] || false;
                     if (isRtl) {
-                        NSView.nativeView.transform = CGAffineTransformMakeRotation(0);
+                        NSView.nativeView.layer.transform = ZeroRotation;
                     }
                     else {
-                        NSView.nativeView.transform = CGAffineTransformMakeRotation((180.0 * Math.PI) / 180.0);
+                        NSView.nativeView.layer.transform = RotationInYAxis180Deg;
                     }
                 }
             }
@@ -46,7 +48,7 @@ var StackLayout = (function (_super) {
                 _this.nativeViewProtected.setRotationY(0);
                 for (var viewIndex = 0; viewIndex < _this["getChildrenCount"](); viewIndex++) {
                     var NSView = _this["getChildAt"](viewIndex);
-                    NSView.nativeView.transform = CGAffineTransformMakeRotation(0);
+                    NSView.nativeView.layer.transform = ZeroRotation;
                 }
             }
         }, 1);

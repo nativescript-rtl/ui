@@ -1,8 +1,12 @@
 import { GridLayout } from "tns-core-modules/ui/layouts/grid-layout";
-import { Property } from "tns-core-modules/ui/core/properties/properties";
+import {
+  Property,
+  CssProperty,
+  Style
+} from "tns-core-modules/ui/core/properties/properties";
 
 export class Common extends GridLayout {
-    public isRtl: boolean;
+  public isRtl: boolean;
 }
 
 export const isRtlProperty = new Property<Common, boolean>({
@@ -20,3 +24,17 @@ export const isRtlProperty = new Property<Common, boolean>({
 });
 
 isRtlProperty.register(Common);
+
+export const directionProperty = new CssProperty<Style, string>({
+  name: "direction",
+  cssName: "direction",
+  defaultValue: "rtl",
+  valueConverter: (value: string) => {
+    const val = value.toLocaleLowerCase();
+    if (val === "rtl" || val === "ltr") {
+      return val;
+    }
+    throw new Error("Invalid string: " + val);
+  }
+});
+directionProperty.register(Style);

@@ -14,14 +14,17 @@ var WrapLayout = (function (_super) {
         _super.prototype.initNativeView.call(this);
         this._updateDirection();
     };
-    WrapLayout.prototype[wrap_layout_common_1.isRtlProperty.getDefault] = function () {
-        var ViewCompat = android.support.v4.view.ViewCompat;
-        var isRtl = ViewCompat.getLayoutDirection(this.nativeViewProtected) === ViewCompat.LAYOUT_DIRECTION_RTL;
-        console.log(isRtl);
-        return isRtl;
-    };
     WrapLayout.prototype[wrap_layout_common_1.isRtlProperty.setNative] = function (isRtl) {
         this.isRtl = isRtl;
+        this._updateDirection();
+    };
+    WrapLayout.prototype[wrap_layout_common_1.directionProperty.setNative] = function (direction) {
+        if (direction === "rtl") {
+            this.isRtl = true;
+        }
+        else if (direction === "ltr") {
+            this.isRtl = false;
+        }
         this._updateDirection();
     };
     WrapLayout.prototype.addChild = function (view) {

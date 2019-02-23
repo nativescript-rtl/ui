@@ -1,4 +1,4 @@
-import { Common, isRtlProperty } from "./grid-layout.common";
+import { Common, isRtlProperty, directionProperty } from "./grid-layout.common";
 import { View } from "tns-core-modules/ui/page/page";
 
 export class GridLayout extends Common {
@@ -9,6 +9,16 @@ export class GridLayout extends Common {
 
   [isRtlProperty.setNative](isRtl: boolean): void {
     this.isRtl = isRtl;
+    this._updateDirection();
+  }
+
+  [directionProperty.setNative](direction: string) {
+    if (direction === "rtl") {
+      this.isRtl = true;
+    } else if (direction === "ltr") {
+      this.isRtl = false;
+    }
+
     this._updateDirection();
   }
 

@@ -14,6 +14,15 @@ var DockLayout = (function (_super) {
         this.isRtl = isRtl;
         this._updateDirection();
     };
+    DockLayout.prototype[dock_layout_common_1.directionProperty.setNative] = function (direction) {
+        if (direction === "rtl") {
+            this.isRtl = true;
+        }
+        else if (direction === "ltr") {
+            this.isRtl = false;
+        }
+        this._updateDirection();
+    };
     DockLayout.prototype.addChild = function (view) {
         _super.prototype.addChild.call(this, view);
         if (view.nativeViewProtected) {
