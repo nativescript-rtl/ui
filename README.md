@@ -37,3 +37,42 @@ declare plugin in XML then use it.
   </rtl:WrapLayout>
 </Page>
 ```
+
+For Angular/Vue 'registerElement` must be used to register each RTL element
+
+example:
+register elements in `app.module.ts`
+```ts
+import { registerElement } from "nativescript-angular/element-registry";
+registerElement(
+  "RGridLayout",
+  () => require("@nativescript-rtl/ui").GridLayout
+);
+registerElement(
+  "RWrapLayout",
+  () => require("@nativescript-rtl/ui").WrapLayout
+);
+registerElement(
+  "RAbsoluteLayout",
+  () => require("@nativescript-rtl/ui").AbsoluteLayout
+);
+registerElement(
+  "RDockLayout",
+  () => require("@nativescript-rtl/ui").DockLayout
+);
+registerElement(
+  "RStackLayout",
+  () => require("@nativescript-rtl/ui").StackLayout
+);
+```
+now you can use `RGridLayout`, `RWrapLayout`, `RAbsoluteLayout`, `RDockLayout` and `RStackLayout` in your angular project
+
+example:
+```xml
+  <RWrapLayout orientation="horizontal" width="210" height="210" backgroundColor="lightgray">
+    <Label text="Label 1" width="70" height="70" backgroundColor="red"></Label>
+    <Label text="Label 2" width="70" height="70" backgroundColor="green"></Label>
+    <Label text="Label 3" width="70" height="70" backgroundColor="blue"></Label>
+    <Label text="Label 4" width="70" height="70" backgroundColor="yellow"></Label>
+  </RWrapLayout>
+```
