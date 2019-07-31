@@ -1,31 +1,5 @@
 {
     "name": "dock-layout",
-    "version": "1.0.0",
-    "description": "Add right-to-left support to NativeScript framework.",
     "main": "dock-layout.js",
-    "typings": "index.d.ts",
-    "nativescript": {
-        "platforms": {
-            "android": "4.0.0",
-            "ios": "4.0.0"
-        }
-    },
-    "keywords": [
-        "NativeScript",
-        "JavaScript",
-        "Android",
-        "iOS"
-    ],
-    "author": {
-        "name": "xlmnxp",
-        "email": "xlmnxp@outlook.sa"
-    },
-    "bugs": {
-        "url": "https://github.com/nativescript-rtl/ui"
-    },
-    "license": "MIT",
-    "homepage": "https://github.com/nativescript-rtl",
-    "readmeFilename": "README.md",
-    "dependencies": {},
-    "bootstrapper": "nativescript-plugin-seed"
+    "typings": "index.d.ts"
 }
