@@ -42,7 +42,7 @@ var Cache = (function (_super) {
             this._mergeRequests(existingRequest, request);
         }
         else {
-            var queueRequest;
+            var queueRequest = void 0;
             for (var i = 0; i < this._queue.length; i++) {
                 if (this._queue[i].key === request.key) {
                     queueRequest = this._queue[i];
@@ -62,9 +62,9 @@ var Cache = (function (_super) {
     Cache.prototype._mergeRequests = function (existingRequest, newRequest) {
         if (existingRequest.completed) {
             if (newRequest.completed) {
-                var existingCompleted = existingRequest.completed;
+                var existingCompleted_1 = existingRequest.completed;
                 var stackCompleted = function (result, key) {
-                    existingCompleted(result, key);
+                    existingCompleted_1(result, key);
                     newRequest.completed(result, key);
                 };
                 existingRequest.completed = stackCompleted;
@@ -72,6 +72,19 @@ var Cache = (function (_super) {
         }
         else {
             existingRequest.completed = newRequest.completed;
+        }
+        if (existingRequest.error) {
+            if (newRequest.error) {
+                var existingError_1 = existingRequest.error;
+                var stackError = function (key) {
+                    existingError_1(key);
+                    newRequest.error(key);
+                };
+                existingRequest.error = stackError;
+            }
+        }
+        else {
+            existingRequest.error = newRequest.error;
         }
     };
     Cache.prototype.get = function (key) {
@@ -91,9 +104,7 @@ var Cache = (function (_super) {
     };
     Cache.prototype._onDownloadCompleted = function (key, image) {
         var request = this._pendingDownloads[key];
-        if (request.key && image) {
-            this.set(request.key, image);
-        }
+        this.set(request.key, image);
         this._currentDownloads--;
         if (request.completed) {
             request.completed(image, request.key);
@@ -104,6 +115,23 @@ var Cache = (function (_super) {
                 object: this,
                 key: key,
                 image: image
+            });
+        }
+        delete this._pendingDownloads[request.key];
+        this._updateQueue();
+    };
+    Cache.prototype._onDownloadError = function (key, err) {
+        var request = this._pendingDownloads[key];
+        this._currentDownloads--;
+        if (request.error) {
+            request.error(request.key);
+        }
+        if (this.hasListeners(Cache.downloadErrorEvent)) {
+            this.notify({
+                eventName: Cache.downloadErrorEvent,
+                object: this,
+                key: key,
+                error: err
             });
         }
         delete this._pendingDownloads[request.key];
@@ -137,6 +165,7 @@ var Cache = (function (_super) {
         this._download(request);
     };
     Cache.downloadedEvent = "downloaded";
+    Cache.downloadErrorEvent = "downloadError";
     return Cache;
 }(observable.Observable));
 exports.Cache = Cache;

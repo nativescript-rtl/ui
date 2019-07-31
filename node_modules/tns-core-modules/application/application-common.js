@@ -29,6 +29,7 @@ exports.resumeEvent = "resume";
 exports.exitEvent = "exit";
 exports.lowMemoryEvent = "lowMemory";
 exports.uncaughtErrorEvent = "uncaughtError";
+exports.discardedErrorEvent = "discardedError";
 exports.orientationChangedEvent = "orientationChanged";
 var cssFile = "./app.css";
 var resources = {};
@@ -51,11 +52,21 @@ function setApplication(instance) {
     app = instance;
 }
 exports.setApplication = setApplication;
-function livesync() {
+function livesync(rootView, context) {
     events.notify({ eventName: "livesync", object: app });
     var liveSyncCore = global.__onLiveSyncCore;
-    if (liveSyncCore) {
-        liveSyncCore();
+    var reapplyAppStyles = false;
+    if (context && context.path) {
+        var styleExtensions = ["css", "scss"];
+        var appStylesFullFileName = getCssFileName();
+        var appStylesFileName_1 = appStylesFullFileName.substring(0, appStylesFullFileName.lastIndexOf(".") + 1);
+        reapplyAppStyles = styleExtensions.some(function (ext) { return context.path === appStylesFileName_1.concat(ext); });
+    }
+    if (reapplyAppStyles && rootView) {
+        rootView._onCssStateChange();
+    }
+    else if (liveSyncCore) {
+        liveSyncCore(context);
     }
 }
 exports.livesync = livesync;
@@ -84,5 +95,8 @@ function addCss(cssText) {
 exports.addCss = addCss;
 global.__onUncaughtError = function (error) {
     events.notify({ eventName: exports.uncaughtErrorEvent, object: app, android: error, ios: error, error: error });
+};
+global.__onDiscardedError = function (error) {
+    events.notify({ eventName: exports.discardedErrorEvent, object: app, error: error });
 };
 //# sourceMappingURL=application-common.js.map

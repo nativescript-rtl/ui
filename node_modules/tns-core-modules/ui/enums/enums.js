@@ -165,7 +165,7 @@ var BackgroundRepeat;
     BackgroundRepeat.repeatY = "repeat-y";
     BackgroundRepeat.noRepeat = "no-repeat";
 })(BackgroundRepeat = exports.BackgroundRepeat || (exports.BackgroundRepeat = {}));
-var animationModule;
+var animation;
 var AnimationCurve;
 (function (AnimationCurve) {
     AnimationCurve.ease = "ease";
@@ -175,8 +175,8 @@ var AnimationCurve;
     AnimationCurve.linear = "linear";
     AnimationCurve.spring = "spring";
     function cubicBezier(x1, y1, x2, y2) {
-        animationModule = animationModule || require("ui/animation");
-        return new animationModule.CubicBezierAnimationCurve(x1, y1, x2, y2);
+        animation = animation || require("ui/animation");
+        return new animation.CubicBezierAnimationCurve(x1, y1, x2, y2);
     }
     AnimationCurve.cubicBezier = cubicBezier;
 })(AnimationCurve = exports.AnimationCurve || (exports.AnimationCurve = {}));

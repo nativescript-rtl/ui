@@ -8,6 +8,7 @@ var DOMDomainDebugger = (function () {
         this.commands = {};
         devtools_elements_1.attachDOMInspectorEventCallbacks(this.events);
         devtools_elements_1.attachDOMInspectorCommandCallbacks(this.commands);
+        this.enable();
     }
     Object.defineProperty(DOMDomainDebugger.prototype, "enabled", {
         get: function () {

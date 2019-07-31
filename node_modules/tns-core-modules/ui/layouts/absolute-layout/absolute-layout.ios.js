@@ -41,11 +41,12 @@ var AbsoluteLayout = (function (_super) {
     AbsoluteLayout.prototype.onLayout = function (left, top, right, bottom) {
         var _this = this;
         _super.prototype.onLayout.call(this, left, top, right, bottom);
+        var insets = this.getSafeAreaInsets();
         this.eachLayoutChild(function (child, last) {
             var childWidth = child.getMeasuredWidth();
             var childHeight = child.getMeasuredHeight();
-            var childLeft = _this.effectiveBorderLeftWidth + _this.effectivePaddingLeft + child.effectiveLeft;
-            var childTop = _this.effectiveBorderTopWidth + _this.effectivePaddingTop + child.effectiveTop;
+            var childLeft = _this.effectiveBorderLeftWidth + _this.effectivePaddingLeft + child.effectiveLeft + insets.left;
+            var childTop = _this.effectiveBorderTopWidth + _this.effectivePaddingTop + child.effectiveTop + insets.top;
             var childRight = childLeft + childWidth + child.effectiveMarginLeft + child.effectiveMarginRight;
             var childBottom = childTop + childHeight + child.effectiveMarginTop + child.effectiveMarginBottom;
             absolute_layout_common_1.View.layoutChild(_this, child, childLeft, childTop, childRight, childBottom);

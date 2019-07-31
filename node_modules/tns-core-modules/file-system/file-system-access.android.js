@@ -23,8 +23,8 @@ var FileSystemAccess = (function () {
     FileSystemAccess.prototype.getParent = function (path, onError) {
         try {
             var javaFile = new java.io.File(path);
-            var parent = javaFile.getParentFile();
-            return { path: parent.getAbsolutePath(), name: parent.getName() };
+            var parent_1 = javaFile.getParentFile();
+            return { path: parent_1.getAbsolutePath(), name: parent_1.getName() };
         }
         catch (exception) {
             if (onError) {
@@ -264,8 +264,9 @@ var FileSystemAccess = (function () {
         if (filesList.length === 0) {
             return true;
         }
-        var i, childFile, success = false;
-        for (i = 0; i < filesList.length; i++) {
+        var childFile;
+        var success = false;
+        for (var i = 0; i < filesList.length; i++) {
             childFile = filesList[i];
             if (childFile.getCanonicalFile().isDirectory()) {
                 success = this.deleteFolderContent(childFile);
@@ -280,7 +281,7 @@ var FileSystemAccess = (function () {
     FileSystemAccess.prototype.ensureFile = function (javaFile, isFolder, onError) {
         try {
             if (!javaFile.exists()) {
-                var created;
+                var created = void 0;
                 if (isFolder) {
                     created = javaFile.mkdirs();
                 }
@@ -326,11 +327,10 @@ var FileSystemAccess = (function () {
                 return;
             }
             var filesList = javaFile.listFiles();
-            var length = filesList.length;
-            var i;
-            var info;
-            var retVal;
-            for (i = 0; i < length; i++) {
+            var length_1 = filesList.length;
+            var info = void 0;
+            var retVal = void 0;
+            for (var i = 0; i < length_1; i++) {
                 javaFile = filesList[i];
                 info = {
                     path: javaFile.getAbsolutePath(),
@@ -370,8 +370,8 @@ var FileSystemAccess = (function () {
         if (paths.length === 1) {
             return paths[0];
         }
-        var i, result = paths[0];
-        for (i = 1; i < paths.length; i++) {
+        var result = paths[0];
+        for (var i = 1; i < paths.length; i++) {
             result = this.joinPath(result, paths[i]);
         }
         return result;

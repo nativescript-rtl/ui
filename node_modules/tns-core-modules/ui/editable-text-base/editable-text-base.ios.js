@@ -10,11 +10,11 @@ var EditableTextBase = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     EditableTextBase.prototype.dismissSoftInput = function () {
-        this.nativeViewProtected.resignFirstResponder();
+        this.nativeTextViewProtected.resignFirstResponder();
         this.notify({ eventName: EditableTextBase.blurEvent, object: this });
     };
     EditableTextBase.prototype[editable_text_base_common_1.keyboardTypeProperty.getDefault] = function () {
-        var keyboardType = this.nativeViewProtected.keyboardType;
+        var keyboardType = this.nativeTextViewProtected.keyboardType;
         switch (keyboardType) {
             case 2:
                 return "number";
@@ -56,10 +56,10 @@ var EditableTextBase = (function (_super) {
                 }
                 break;
         }
-        this.nativeViewProtected.keyboardType = newKeyboardType;
+        this.nativeTextViewProtected.keyboardType = newKeyboardType;
     };
     EditableTextBase.prototype[editable_text_base_common_1.returnKeyTypeProperty.getDefault] = function () {
-        var returnKeyType = this.nativeViewProtected.returnKeyType;
+        var returnKeyType = this.nativeTextViewProtected.returnKeyType;
         switch (returnKeyType) {
             case 9:
                 return "done";
@@ -103,10 +103,10 @@ var EditableTextBase = (function (_super) {
                 }
                 break;
         }
-        this.nativeViewProtected.returnKeyType = newValue;
+        this.nativeTextViewProtected.returnKeyType = newValue;
     };
     EditableTextBase.prototype[editable_text_base_common_1.autocapitalizationTypeProperty.getDefault] = function () {
-        var autocapitalizationType = this.nativeViewProtected.autocapitalizationType;
+        var autocapitalizationType = this.nativeTextViewProtected.autocapitalizationType;
         switch (autocapitalizationType) {
             case 0:
                 return "none";
@@ -139,10 +139,10 @@ var EditableTextBase = (function (_super) {
                 newValue = 2;
                 break;
         }
-        this.nativeViewProtected.autocapitalizationType = newValue;
+        this.nativeTextViewProtected.autocapitalizationType = newValue;
     };
     EditableTextBase.prototype[editable_text_base_common_1.autocorrectProperty.getDefault] = function () {
-        var autocorrectionType = this.nativeViewProtected.autocorrectionType;
+        var autocorrectionType = this.nativeTextViewProtected.autocorrectionType;
         switch (autocorrectionType) {
             case 2:
                 return true;
@@ -163,7 +163,7 @@ var EditableTextBase = (function (_super) {
         else {
             newValue = 1;
         }
-        this.nativeViewProtected.autocorrectionType = newValue;
+        this.nativeTextViewProtected.autocorrectionType = newValue;
     };
     return EditableTextBase;
 }(editable_text_base_common_1.EditableTextBase));

@@ -3,6 +3,7 @@
  */ /** */
 
 import { View, Color } from "../core/view";
+import { PercentLength } from "../styling/style-properties";
 
 /**
  * Defines animation options for the View.animate method.
@@ -32,6 +33,16 @@ export interface AnimationDefinition {
      * Animates the scale affine transform of the view.
      */
     scale?: Pair;
+
+    /**
+     * Animates the height of a view.
+     */
+    height?: PercentLength | string;
+
+    /**
+     * Animates the width of a view.
+     */
+    width?: PercentLength | string;
 
     /**
      * Animates the rotate affine transform of the view. Value should be a number specifying the rotation amount in degrees.
@@ -126,7 +137,7 @@ export type AnimationPromise = Promise<void> & Cancelable;
  */
 export class Animation {
     constructor(animationDefinitions: Array<AnimationDefinition>, playSequentially?: boolean);
-    public play: () => AnimationPromise;
+    public play: (resetOnFinish?: boolean) => AnimationPromise;
     public cancel: () => void;
     public isPlaying: boolean;
     public _resolveAnimationCurve(curve: any): any;

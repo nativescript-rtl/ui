@@ -121,55 +121,61 @@ var UITextFieldImpl = (function (_super) {
 var TextField = (function (_super) {
     __extends(TextField, _super);
     function TextField() {
-        var _this = _super.call(this) || this;
-        var weakRef = new WeakRef(_this);
-        _this._ios = UITextFieldImpl.initWithOwner(weakRef);
-        _this._delegate = UITextFieldDelegateImpl.initWithOwner(weakRef);
-        _this.nativeViewProtected = _this._ios;
-        return _this;
+        return _super !== null && _super.apply(this, arguments) || this;
     }
+    TextField.prototype.createNativeView = function () {
+        return UITextFieldImpl.initWithOwner(new WeakRef(this));
+    };
+    TextField.prototype.initNativeView = function () {
+        _super.prototype.initNativeView.call(this);
+        this._delegate = UITextFieldDelegateImpl.initWithOwner(new WeakRef(this));
+    };
+    TextField.prototype.disposeNativeView = function () {
+        this._delegate = null;
+        _super.prototype.disposeNativeView.call(this);
+    };
     TextField.prototype.onLoaded = function () {
         _super.prototype.onLoaded.call(this);
-        this._ios.delegate = this._delegate;
+        this.ios.delegate = this._delegate;
     };
     TextField.prototype.onUnloaded = function () {
-        this._ios.delegate = null;
+        this.ios.delegate = null;
         _super.prototype.onUnloaded.call(this);
     };
     Object.defineProperty(TextField.prototype, "ios", {
         get: function () {
-            return this._ios;
+            return this.nativeViewProtected;
         },
         enumerable: true,
         configurable: true
     });
     TextField.prototype[text_field_common_1.hintProperty.getDefault] = function () {
-        return this.nativeViewProtected.placeholder;
+        return this.nativeTextViewProtected.placeholder;
     };
     TextField.prototype[text_field_common_1.hintProperty.setNative] = function (value) {
         this._updateAttributedPlaceholder();
     };
     TextField.prototype[text_field_common_1.secureProperty.getDefault] = function () {
-        return this.nativeViewProtected.secureTextEntry;
+        return this.nativeTextViewProtected.secureTextEntry;
     };
     TextField.prototype[text_field_common_1.secureProperty.setNative] = function (value) {
-        this.nativeViewProtected.secureTextEntry = value;
+        this.nativeTextViewProtected.secureTextEntry = value;
     };
     TextField.prototype[text_field_common_1.colorProperty.getDefault] = function () {
         return {
-            textColor: this.nativeViewProtected.textColor,
-            tintColor: this.nativeViewProtected.tintColor
+            textColor: this.nativeTextViewProtected.textColor,
+            tintColor: this.nativeTextViewProtected.tintColor
         };
     };
     TextField.prototype[text_field_common_1.colorProperty.setNative] = function (value) {
         if (value instanceof text_field_common_1.Color) {
             var color = value instanceof text_field_common_1.Color ? value.ios : value;
-            this.nativeViewProtected.textColor = color;
-            this.nativeViewProtected.tintColor = color;
+            this.nativeTextViewProtected.textColor = color;
+            this.nativeTextViewProtected.tintColor = color;
         }
         else {
-            this.nativeViewProtected.textColor = value.textColor;
-            this.nativeViewProtected.tintColor = value.tintColor;
+            this.nativeTextViewProtected.textColor = value.textColor;
+            this.nativeTextViewProtected.tintColor = value.tintColor;
         }
     };
     TextField.prototype[text_field_common_1.placeholderColorProperty.getDefault] = function () {
@@ -194,7 +200,7 @@ var TextField = (function (_super) {
             attributes[NSForegroundColorAttributeName] = this.style.placeholderColor.ios;
         }
         var attributedPlaceholder = NSAttributedString.alloc().initWithStringAttributes(stringValue, attributes);
-        this.nativeViewProtected.attributedPlaceholder = attributedPlaceholder;
+        this.nativeTextViewProtected.attributedPlaceholder = attributedPlaceholder;
     };
     TextField.prototype[text_field_common_1.paddingTopProperty.getDefault] = function () {
         return zeroLength;

@@ -64,6 +64,7 @@ function startMonitoring(connectionTypeChangedCallback) {
         _connectionTypeChangedCallback = zonedCallback(connectionTypeChangedCallback);
         SCNetworkReachabilitySetCallback(_monitorReachabilityRef, _reachabilityCallbackFunctionRef, null);
         SCNetworkReachabilityScheduleWithRunLoop(_monitorReachabilityRef, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
+        _connectionTypeChangedCallback(_getConnectionType());
     }
 }
 exports.startMonitoring = startMonitoring;

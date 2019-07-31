@@ -886,44 +886,47 @@ var FlexboxLayout = (function (_super) {
         return flexDirection === flexbox_layout_common_1.FlexDirection.ROW || flexDirection === flexbox_layout_common_1.FlexDirection.ROW_REVERSE;
     };
     FlexboxLayout.prototype.onLayout = function (left, top, right, bottom) {
+        var insets = this.getSafeAreaInsets();
         var isRtl;
         switch (this.flexDirection) {
             case flexbox_layout_common_1.FlexDirection.ROW:
                 isRtl = false;
-                this._layoutHorizontal(isRtl, left, top, right, bottom);
+                this._layoutHorizontal(isRtl, left, top, right, bottom, insets);
                 break;
             case flexbox_layout_common_1.FlexDirection.ROW_REVERSE:
                 isRtl = true;
-                this._layoutHorizontal(isRtl, left, top, right, bottom);
+                this._layoutHorizontal(isRtl, left, top, right, bottom, insets);
                 break;
             case flexbox_layout_common_1.FlexDirection.COLUMN:
                 isRtl = false;
                 if (this.flexWrap === flexbox_layout_common_1.FlexWrap.WRAP_REVERSE) {
                     isRtl = !isRtl;
                 }
-                this._layoutVertical(isRtl, false, left, top, right, bottom);
+                this._layoutVertical(isRtl, false, left, top, right, bottom, insets);
                 break;
             case flexbox_layout_common_1.FlexDirection.COLUMN_REVERSE:
                 isRtl = false;
                 if (this.flexWrap === flexbox_layout_common_1.FlexWrap.WRAP_REVERSE) {
                     isRtl = !isRtl;
                 }
-                this._layoutVertical(isRtl, true, left, top, right, bottom);
+                this._layoutVertical(isRtl, true, left, top, right, bottom, insets);
                 break;
             default:
                 throw new Error("Invalid flex direction is set: " + this.flexDirection);
         }
     };
-    FlexboxLayout.prototype._layoutHorizontal = function (isRtl, left, top, right, bottom) {
+    FlexboxLayout.prototype._layoutHorizontal = function (isRtl, left, top, right, bottom, insets) {
         var _this = this;
-        var paddingLeft = this.effectivePaddingLeft;
-        var paddingRight = this.effectivePaddingRight;
+        var paddingLeft = this.effectivePaddingLeft + insets.left;
+        var paddingTop = this.effectivePaddingTop + insets.top;
+        var paddingRight = this.effectivePaddingRight + insets.right;
+        var paddingBottom = this.effectivePaddingBottom + insets.bottom;
         var childLeft;
         var currentViewIndex = 0;
         var height = bottom - top;
         var width = right - left;
-        var childBottom = height - this.effectivePaddingBottom;
-        var childTop = this.effectivePaddingTop;
+        var childBottom = height - paddingBottom;
+        var childTop = paddingTop;
         var childRight;
         this._flexLines.forEach(function (flexLine, i) {
             var spaceBetweenItem = 0.0;
@@ -937,12 +940,12 @@ var FlexboxLayout = (function (_super) {
                     childRight = flexLine._mainSize - paddingLeft;
                     break;
                 case flexbox_layout_common_1.JustifyContent.CENTER:
-                    childLeft = paddingLeft + (width - flexLine._mainSize) / 2.0;
-                    childRight = width - paddingRight - (width - flexLine._mainSize) / 2.0;
+                    childLeft = paddingLeft + (width - insets.left - insets.right - flexLine._mainSize) / 2.0;
+                    childRight = width - paddingRight - (width - insets.left - insets.right - flexLine._mainSize) / 2.0;
                     break;
                 case flexbox_layout_common_1.JustifyContent.SPACE_AROUND:
                     if (flexLine._itemCount !== 0) {
-                        spaceBetweenItem = (width - flexLine.mainSize) / flexLine._itemCount;
+                        spaceBetweenItem = (width - insets.left - insets.right - flexLine.mainSize) / flexLine._itemCount;
                     }
                     childLeft = paddingLeft + spaceBetweenItem / 2.0;
                     childRight = width - paddingRight - spaceBetweenItem / 2.0;
@@ -950,7 +953,7 @@ var FlexboxLayout = (function (_super) {
                 case flexbox_layout_common_1.JustifyContent.SPACE_BETWEEN:
                     childLeft = paddingLeft;
                     var denominator = flexLine.itemCount !== 1 ? flexLine.itemCount - 1 : 1.0;
-                    spaceBetweenItem = (width - flexLine.mainSize) / denominator;
+                    spaceBetweenItem = (width - insets.left - insets.right - flexLine.mainSize) / denominator;
                     childRight = width - paddingRight;
                     break;
                 default:
@@ -1048,12 +1051,13 @@ var FlexboxLayout = (function (_super) {
                 break;
         }
     };
-    FlexboxLayout.prototype._layoutVertical = function (isRtl, fromBottomToTop, left, top, right, bottom) {
+    FlexboxLayout.prototype._layoutVertical = function (isRtl, fromBottomToTop, left, top, right, bottom, insets) {
         var _this = this;
-        var paddingTop = this.effectivePaddingTop;
-        var paddingBottom = this.effectivePaddingBottom;
-        var paddingRight = this.effectivePaddingRight;
-        var childLeft = this.effectivePaddingLeft;
+        var paddingLeft = this.effectivePaddingLeft + insets.left;
+        var paddingTop = this.effectivePaddingTop + insets.top;
+        var paddingRight = this.effectivePaddingRight + insets.right;
+        var paddingBottom = this.effectivePaddingBottom + insets.bottom;
+        var childLeft = paddingLeft;
         var currentViewIndex = 0;
         var width = right - left;
         var height = bottom - top;
@@ -1072,12 +1076,12 @@ var FlexboxLayout = (function (_super) {
                     childBottom = flexLine._mainSize - paddingTop;
                     break;
                 case flexbox_layout_common_1.JustifyContent.CENTER:
-                    childTop = paddingTop + (height - flexLine._mainSize) / 2.0;
-                    childBottom = height - paddingBottom - (height - flexLine._mainSize) / 2.0;
+                    childTop = paddingTop + (height - insets.top - insets.bottom - flexLine._mainSize) / 2.0;
+                    childBottom = height - paddingBottom - (height - insets.top - insets.bottom - flexLine._mainSize) / 2.0;
                     break;
                 case flexbox_layout_common_1.JustifyContent.SPACE_AROUND:
                     if (flexLine._itemCount !== 0) {
-                        spaceBetweenItem = (height - flexLine._mainSize) / flexLine.itemCount;
+                        spaceBetweenItem = (height - insets.top - insets.bottom - flexLine._mainSize) / flexLine.itemCount;
                     }
                     childTop = paddingTop + spaceBetweenItem / 2.0;
                     childBottom = height - paddingBottom - spaceBetweenItem / 2.0;
@@ -1085,7 +1089,7 @@ var FlexboxLayout = (function (_super) {
                 case flexbox_layout_common_1.JustifyContent.SPACE_BETWEEN:
                     childTop = paddingTop;
                     var denominator = flexLine.itemCount !== 1 ? flexLine.itemCount - 1 : 1.0;
-                    spaceBetweenItem = (height - flexLine.mainSize) / denominator;
+                    spaceBetweenItem = (height - insets.top - insets.bottom - flexLine.mainSize) / denominator;
                     childBottom = height - paddingBottom;
                     break;
                 default:

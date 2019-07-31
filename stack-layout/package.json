@@ -2,7 +2,7 @@
     "name": "stack-layout",
     "version": "1.0.0",
     "description": "Add right-to-left support to NativeScript framework.",
-    "main": "stack-layout",
+    "main": "stack-layout.js",
     "typings": "index.d.ts",
     "nativescript": {
         "platforms": {

@@ -108,20 +108,16 @@ var WrapLayout = (function (_super) {
     WrapLayout.prototype.onLayout = function (left, top, right, bottom) {
         var _this = this;
         _super.prototype.onLayout.call(this, left, top, right, bottom);
+        var insets = this.getSafeAreaInsets();
         var isVertical = this.orientation === "vertical";
-        var paddingLeft = this.effectiveBorderLeftWidth + this.effectivePaddingLeft;
-        var paddingTop = this.effectiveBorderTopWidth + this.effectivePaddingTop;
-        var paddingRight = this.effectiveBorderRightWidth + this.effectivePaddingRight;
-        var paddingBottom = this.effectiveBorderBottomWidth + this.effectivePaddingBottom;
+        var paddingLeft = this.effectiveBorderLeftWidth + this.effectivePaddingLeft + insets.left;
+        var paddingTop = this.effectiveBorderTopWidth + this.effectivePaddingTop + insets.top;
+        var paddingRight = this.effectiveBorderRightWidth + this.effectivePaddingRight + insets.right;
+        var paddingBottom = this.effectiveBorderBottomWidth + this.effectivePaddingBottom + insets.bottom;
         var childLeft = paddingLeft;
         var childTop = paddingTop;
-        var childrenLength;
-        if (isVertical) {
-            childrenLength = bottom - top - paddingBottom;
-        }
-        else {
-            childrenLength = right - left - paddingRight;
-        }
+        var childrenHeight = bottom - top - paddingBottom;
+        var childrenWidth = right - left - paddingRight;
         var rowOrColumn = 0;
         this.eachLayoutChild(function (child, last) {
             var childHeight = child.getMeasuredHeight() + child.effectiveMarginTop + child.effectiveMarginBottom;
@@ -131,7 +127,7 @@ var WrapLayout = (function (_super) {
                 childWidth = length;
                 childHeight = _this.effectiveItemHeight > 0 ? _this.effectiveItemHeight : childHeight;
                 var isFirst = childTop === paddingTop;
-                if (childTop + childHeight > childrenLength) {
+                if (childTop + childHeight > childrenHeight && childLeft + childWidth <= childrenWidth) {
                     childTop = paddingTop;
                     if (!isFirst) {
                         childLeft += length;
@@ -139,12 +135,16 @@ var WrapLayout = (function (_super) {
                     rowOrColumn++;
                     childWidth = _this._lengths[isFirst ? rowOrColumn - 1 : rowOrColumn];
                 }
+                if (childLeft < childrenWidth && childTop < childrenHeight) {
+                    wrap_layout_common_1.View.layoutChild(_this, child, childLeft, childTop, childLeft + childWidth, childTop + childHeight);
+                }
+                childTop += childHeight;
             }
             else {
                 childWidth = _this.effectiveItemWidth > 0 ? _this.effectiveItemWidth : childWidth;
                 childHeight = length;
                 var isFirst = childLeft === paddingLeft;
-                if (childLeft + childWidth > childrenLength) {
+                if (childLeft + childWidth > childrenWidth && childTop + childHeight <= childrenHeight) {
                     childLeft = paddingLeft;
                     if (!isFirst) {
                         childTop += length;
@@ -152,12 +152,9 @@ var WrapLayout = (function (_super) {
                     rowOrColumn++;
                     childHeight = _this._lengths[isFirst ? rowOrColumn - 1 : rowOrColumn];
                 }
-            }
-            wrap_layout_common_1.View.layoutChild(_this, child, childLeft, childTop, childLeft + childWidth, childTop + childHeight);
-            if (isVertical) {
-                childTop += childHeight;
-            }
-            else {
+                if (childLeft < childrenWidth && childTop < childrenHeight) {
+                    wrap_layout_common_1.View.layoutChild(_this, child, childLeft, childTop, childLeft + childWidth, childTop + childHeight);
+                }
                 childLeft += childWidth;
             }
         });

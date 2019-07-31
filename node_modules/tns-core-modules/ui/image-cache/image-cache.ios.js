@@ -2,7 +2,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var common = require("./image-cache-common");
 var trace = require("../../trace");
 var utils = require("../../utils/utils");
-var getter = utils.ios.getter;
 var httpRequest;
 function ensureHttpRequest() {
     if (!httpRequest) {
@@ -19,14 +18,14 @@ var MemmoryWarningHandler = (function (_super) {
     };
     MemmoryWarningHandler.prototype.initWithCache = function (cache) {
         this._cache = cache;
-        getter(NSNotificationCenter, NSNotificationCenter.defaultCenter).addObserverSelectorNameObject(this, "clearCache", "UIApplicationDidReceiveMemoryWarningNotification", null);
+        NSNotificationCenter.defaultCenter.addObserverSelectorNameObject(this, "clearCache", "UIApplicationDidReceiveMemoryWarningNotification", null);
         if (trace.isEnabled()) {
             trace.write("[MemmoryWarningHandler] Added low memory observer.", trace.categories.Debug);
         }
         return this;
     };
     MemmoryWarningHandler.prototype.dealloc = function () {
-        getter(NSNotificationCenter, NSNotificationCenter.defaultCenter).removeObserverNameObject(this, "UIApplicationDidReceiveMemoryWarningNotification", null);
+        NSNotificationCenter.defaultCenter.removeObserverNameObject(this, "UIApplicationDidReceiveMemoryWarningNotification", null);
         if (trace.isEnabled()) {
             trace.write("[MemmoryWarningHandler] Removed low memory observer.", trace.categories.Debug);
         }
@@ -53,12 +52,24 @@ var Cache = (function (_super) {
         return _this;
     }
     Cache.prototype._downloadCore = function (request) {
+        var _this = this;
         ensureHttpRequest();
-        var that = this;
         httpRequest.request({ url: request.url, method: "GET" })
             .then(function (response) {
-            var image = UIImage.alloc().initWithData(response.content.raw);
-            that._onDownloadCompleted(request.key, image);
+            try {
+                var image = UIImage.alloc().initWithData(response.content.raw);
+                if (image) {
+                    _this._onDownloadCompleted(request.key, image);
+                }
+                else {
+                    _this._onDownloadError(request.key, new Error("No result for provided url"));
+                }
+            }
+            catch (err) {
+                _this._onDownloadError(request.key, err);
+            }
+        }, function (err) {
+            _this._onDownloadError(request.key, err);
         });
     };
     Cache.prototype.get = function (key) {

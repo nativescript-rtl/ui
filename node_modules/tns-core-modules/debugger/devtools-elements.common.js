@@ -1,5 +1,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var dom_node_1 = require("./dom-node");
+var utils_1 = require("../utils/utils");
 var frameTopmost = function () { return require("../ui/frame").topmost(); };
 var unsetValue;
 function unsetViewValue(view, name) {
@@ -38,7 +39,7 @@ function getComputedStylesForNode(nodeId) {
     return [];
 }
 exports.getComputedStylesForNode = getComputedStylesForNode;
-function removeNode(nodeId) {
+exports.removeNode = utils_1.mainThreadify(function removeNode(nodeId) {
     var view = getViewById(nodeId);
     if (view) {
         var parent_1 = view.parent;
@@ -52,9 +53,8 @@ function removeNode(nodeId) {
             console.log("Can't remove child from " + parent_1);
         }
     }
-}
-exports.removeNode = removeNode;
-function setAttributeAsText(nodeId, text, name) {
+});
+exports.setAttributeAsText = utils_1.mainThreadify(function setAttributeAsText(nodeId, text, name) {
     var view = getViewById(nodeId);
     if (view) {
         var hasOriginalAttribute = !!name.trim();
@@ -77,6 +77,5 @@ function setAttributeAsText(nodeId, text, name) {
         }
         view.domNode.loadAttributes();
     }
-}
-exports.setAttributeAsText = setAttributeAsText;
+});
 //# sourceMappingURL=devtools-elements.common.js.map

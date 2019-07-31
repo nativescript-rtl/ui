@@ -431,9 +431,11 @@ function createSelectorFromAst(ast) {
     }
     else {
         var simpleSelectorSequences = [];
+        var simpleSelectorSequence = void 0;
+        var combinator = void 0;
         for (var i = 0; i < ast.length; i++) {
-            var simpleSelectorSequence = createSimpleSelectorSequenceFromAst(ast[i][0]);
-            var combinator = ast[i][1];
+            simpleSelectorSequence = createSimpleSelectorSequenceFromAst(ast[i][0]);
+            combinator = ast[i][1];
             if (combinator) {
                 simpleSelectorSequence.combinator = combinator;
             }

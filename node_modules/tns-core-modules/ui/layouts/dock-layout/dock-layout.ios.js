@@ -68,10 +68,11 @@ var DockLayout = (function (_super) {
     DockLayout.prototype.onLayout = function (left, top, right, bottom) {
         var _this = this;
         _super.prototype.onLayout.call(this, left, top, right, bottom);
-        var horizontalPaddingsAndMargins = this.effectivePaddingLeft + this.effectivePaddingRight + this.effectiveBorderLeftWidth + this.effectiveBorderRightWidth;
-        var verticalPaddingsAndMargins = this.effectivePaddingTop + this.effectivePaddingBottom + this.effectiveBorderTopWidth + this.effectiveBorderBottomWidth;
-        var childLeft = this.effectiveBorderLeftWidth + this.effectivePaddingLeft;
-        var childTop = this.effectiveBorderTopWidth + this.effectivePaddingTop;
+        var insets = this.getSafeAreaInsets();
+        var horizontalPaddingsAndMargins = this.effectivePaddingLeft + this.effectivePaddingRight + this.effectiveBorderLeftWidth + this.effectiveBorderRightWidth + insets.left + insets.right;
+        var verticalPaddingsAndMargins = this.effectivePaddingTop + this.effectivePaddingBottom + this.effectiveBorderTopWidth + this.effectiveBorderBottomWidth + insets.top + insets.bottom;
+        var childLeft = this.effectiveBorderLeftWidth + this.effectivePaddingLeft + insets.left;
+        var childTop = this.effectiveBorderTopWidth + this.effectivePaddingTop + insets.top;
         var x = childLeft;
         var y = childTop;
         var remainingWidth = Math.max(0, right - left - horizontalPaddingsAndMargins);

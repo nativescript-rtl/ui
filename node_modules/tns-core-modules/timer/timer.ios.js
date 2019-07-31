@@ -1,5 +1,4 @@
 Object.defineProperty(exports, "__esModule", { value: true });
-var utils = require("../utils/utils");
 var timeoutCallbacks = new Map();
 var timerId = 0;
 var TimerTargetImpl = (function (_super) {
@@ -40,7 +39,7 @@ function createTimerAndGetId(callback, milliseconds, shouldRepeat) {
     var id = timerId;
     var timerTarget = TimerTargetImpl.initWithCallback(callback, id, shouldRepeat);
     var timer = NSTimer.scheduledTimerWithTimeIntervalTargetSelectorUserInfoRepeats(milliseconds / 1000, timerTarget, "tick", null, shouldRepeat);
-    utils.ios.getter(NSRunLoop, NSRunLoop.currentRunLoop).addTimerForMode(timer, NSRunLoopCommonModes);
+    NSRunLoop.currentRunLoop.addTimerForMode(timer, NSRunLoopCommonModes);
     var pair = { k: timer, v: timerTarget };
     timeoutCallbacks.set(id, pair);
     return id;

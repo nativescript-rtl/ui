@@ -7,15 +7,20 @@ __export(require("./image-common"));
 var Image = (function (_super) {
     __extends(Image, _super);
     function Image() {
-        var _this = _super.call(this) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
         _this._imageSourceAffectsLayout = true;
+        return _this;
+    }
+    Image.prototype.createNativeView = function () {
         var imageView = UIImageView.new();
         imageView.contentMode = 1;
         imageView.userInteractionEnabled = true;
-        _this.nativeViewProtected = imageView;
-        _this._setNativeClipToBounds();
-        return _this;
-    }
+        return imageView;
+    };
+    Image.prototype.initNativeView = function () {
+        _super.prototype.initNativeView.call(this);
+        this._setNativeClipToBounds();
+    };
     Image.prototype.setTintColor = function (value) {
         if (value && this.nativeViewProtected.image && !this._templateImageWasCreated) {
             this.nativeViewProtected.image = this.nativeViewProtected.image.imageWithRenderingMode(2);

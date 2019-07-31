@@ -122,12 +122,24 @@ var categories;
     categories.Error = "Error";
     categories.Animation = "Animation";
     categories.Transition = "Transition";
-    categories.All = categories.VisualTreeEvents + "," + categories.Layout + "," + categories.Style + "," + categories.ViewHierarchy + "," + categories.NativeLifecycle + "," + categories.Debug + "," + categories.Navigation + "," + categories.Test + "," + categories.Binding + "," + categories.Error + "," + categories.Animation + "," + categories.Transition;
+    categories.Livesync = "Livesync";
     categories.separator = ",";
+    categories.All = categories.VisualTreeEvents + categories.separator
+        + categories.Layout + categories.separator
+        + categories.Style + categories.separator
+        + categories.ViewHierarchy + categories.separator
+        + categories.NativeLifecycle + categories.separator
+        + categories.Debug + categories.separator
+        + categories.Navigation + categories.separator
+        + categories.Test + categories.separator
+        + categories.Binding + categories.separator
+        + categories.Error + categories.separator
+        + categories.Animation + categories.separator
+        + categories.Transition + categories.separator
+        + categories.Livesync;
     function concat() {
-        var i;
         var result;
-        for (i = 0; i < arguments.length; i++) {
+        for (var i = 0; i < arguments.length; i++) {
             if (!result) {
                 result = arguments[i];
                 continue;

@@ -7,11 +7,13 @@ __export(require("./activity-indicator-common"));
 var ActivityIndicator = (function (_super) {
     __extends(ActivityIndicator, _super);
     function ActivityIndicator() {
-        var _this = _super.call(this) || this;
-        _this.nativeViewProtected = UIActivityIndicatorView.alloc().initWithActivityIndicatorStyle(2);
-        _this.nativeViewProtected.hidesWhenStopped = true;
-        return _this;
+        return _super !== null && _super.apply(this, arguments) || this;
     }
+    ActivityIndicator.prototype.createNativeView = function () {
+        var view = UIActivityIndicatorView.alloc().initWithActivityIndicatorStyle(2);
+        view.hidesWhenStopped = true;
+        return view;
+    };
     Object.defineProperty(ActivityIndicator.prototype, "ios", {
         get: function () {
             return this.nativeViewProtected;

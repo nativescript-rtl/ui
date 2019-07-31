@@ -100,13 +100,13 @@ var ProxyViewContainer = (function (_super) {
         var newLayout = this.parent;
         var oldLayout = oldParent;
         if (addingToParent && newLayout instanceof layout_base_1.LayoutBase) {
-            this.eachChildView(function (child) {
+            this.eachLayoutChild(function (child) {
                 newLayout._registerLayoutChild(child);
                 return true;
             });
         }
         else if (oldLayout instanceof layout_base_1.LayoutBase) {
-            this.eachChildView(function (child) {
+            this.eachLayoutChild(function (child) {
                 oldLayout._unregisterLayoutChild(child);
                 return true;
             });

@@ -1,12 +1,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.checkKey = function (key) {
+function checkKey(key) {
     if (typeof key !== "string") {
         throw new Error("key: '" + key + "' must be a string");
     }
-};
-exports.ensureValidValue = function (value, valueType) {
+}
+exports.checkKey = checkKey;
+function ensureValidValue(value, valueType) {
     if (typeof value !== valueType) {
         throw new Error("value: '" + value + "' must be a " + valueType);
     }
-};
+}
+exports.ensureValidValue = ensureValidValue;
 //# sourceMappingURL=application-settings-common.js.map

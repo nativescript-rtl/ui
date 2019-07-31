@@ -1,14 +1,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var inspectorCommands = require("./InspectorBackendCommands");
 var debuggerDomains = require("./debugger");
-function getter(_this, property) {
-    if (typeof property === "function") {
-        return property.call(_this);
-    }
-    else {
-        return property;
-    }
-}
 var frameId = "NativeScriptMainFrameIdentifier";
 var loaderId = "Loader Identifier";
 var resources_datas = [];
@@ -122,6 +114,7 @@ exports.Request = Request;
 var NetworkDomainDebugger = (function () {
     function NetworkDomainDebugger() {
         this.events = new inspectorCommands.NetworkDomain.NetworkFrontend();
+        this.enable();
     }
     NetworkDomainDebugger_1 = NetworkDomainDebugger;
     Object.defineProperty(NetworkDomainDebugger.prototype, "enabled", {
@@ -176,9 +169,9 @@ var NetworkDomainDebugger = (function () {
     NetworkDomainDebugger.prototype.setCacheDisabled = function (params) {
     };
     NetworkDomainDebugger.prototype.loadResource = function (params) {
-        var appPath = getter(NSBundle, NSBundle.mainBundle).bundlePath;
+        var appPath = NSBundle.mainBundle.bundlePath;
         var pathUrl = params.url.replace("file://", appPath);
-        var fileManager = getter(NSFileManager, NSFileManager.defaultManager);
+        var fileManager = NSFileManager.defaultManager;
         var data = fileManager.fileExistsAtPath(pathUrl) ? fileManager.contentsAtPath(pathUrl) : undefined;
         var content = data ? NSString.alloc().initWithDataEncoding(data, NSUTF8StringEncoding) : "";
         return {

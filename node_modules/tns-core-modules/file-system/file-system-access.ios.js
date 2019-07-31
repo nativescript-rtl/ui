@@ -5,7 +5,7 @@ var FileSystemAccess = (function () {
     function FileSystemAccess() {
     }
     FileSystemAccess.prototype.getLastModified = function (path) {
-        var fileManager = utils_1.ios.getter(NSFileManager, NSFileManager.defaultManager);
+        var fileManager = NSFileManager.defaultManager;
         var attributes = fileManager.attributesOfItemAtPathError(path);
         if (attributes) {
             return attributes.objectForKey("NSFileModificationDate");
@@ -15,7 +15,7 @@ var FileSystemAccess = (function () {
         }
     };
     FileSystemAccess.prototype.getFileSize = function (path) {
-        var fileManager = utils_1.ios.getter(NSFileManager, NSFileManager.defaultManager);
+        var fileManager = NSFileManager.defaultManager;
         var attributes = fileManager.attributesOfItemAtPathError(path);
         if (attributes) {
             return attributes.objectForKey("NSFileSize");
@@ -26,7 +26,7 @@ var FileSystemAccess = (function () {
     };
     FileSystemAccess.prototype.getParent = function (path, onError) {
         try {
-            var fileManager = utils_1.ios.getter(NSFileManager, NSFileManager.defaultManager);
+            var fileManager = NSFileManager.defaultManager;
             var nsString = NSString.stringWithString(path);
             var parentPath = nsString.stringByDeletingLastPathComponent;
             var name_1 = fileManager.displayNameAtPath(parentPath);
@@ -44,7 +44,7 @@ var FileSystemAccess = (function () {
     };
     FileSystemAccess.prototype.getFile = function (path, onError) {
         try {
-            var fileManager = utils_1.ios.getter(NSFileManager, NSFileManager.defaultManager);
+            var fileManager = NSFileManager.defaultManager;
             var exists = fileManager.fileExistsAtPath(path);
             if (!exists) {
                 var parentPath = this.getParent(path, onError).path;
@@ -72,7 +72,7 @@ var FileSystemAccess = (function () {
     };
     FileSystemAccess.prototype.getFolder = function (path, onError) {
         try {
-            var fileManager = utils_1.ios.getter(NSFileManager, NSFileManager.defaultManager);
+            var fileManager = NSFileManager.defaultManager;
             var exists = this.folderExists(path);
             if (!exists) {
                 try {
@@ -100,7 +100,7 @@ var FileSystemAccess = (function () {
     };
     FileSystemAccess.prototype.getExistingFolder = function (path, onError) {
         try {
-            var fileManager = utils_1.ios.getter(NSFileManager, NSFileManager.defaultManager);
+            var fileManager = NSFileManager.defaultManager;
             var exists = this.folderExists(path);
             if (exists) {
                 var dirName = fileManager.displayNameAtPath(path);
@@ -152,7 +152,7 @@ var FileSystemAccess = (function () {
         return result.exists && result.isDirectory;
     };
     FileSystemAccess.prototype.exists = function (path) {
-        var fileManager = utils_1.ios.getter(NSFileManager, NSFileManager.defaultManager);
+        var fileManager = NSFileManager.defaultManager;
         var isDirectory = new interop.Reference(interop.types.bool, false);
         var exists = fileManager.fileExistsAtPathIsDirectory(path, isDirectory);
         return { exists: exists, isDirectory: isDirectory.value };
@@ -167,7 +167,7 @@ var FileSystemAccess = (function () {
         this.deleteEntity(path, onError);
     };
     FileSystemAccess.prototype.emptyFolder = function (path, onError) {
-        var fileManager = utils_1.ios.getter(NSFileManager, NSFileManager.defaultManager);
+        var fileManager = NSFileManager.defaultManager;
         var entities = this.getEntities(path, onError);
         if (!entities) {
             return;
@@ -185,7 +185,7 @@ var FileSystemAccess = (function () {
         }
     };
     FileSystemAccess.prototype.rename = function (path, newPath, onError) {
-        var fileManager = utils_1.ios.getter(NSFileManager, NSFileManager.defaultManager);
+        var fileManager = NSFileManager.defaultManager;
         try {
             fileManager.moveItemAtPathToPathError(path, newPath);
         }
@@ -196,7 +196,7 @@ var FileSystemAccess = (function () {
         }
     };
     FileSystemAccess.prototype.getLogicalRootPath = function () {
-        var mainBundlePath = utils_1.ios.getter(NSBundle, NSBundle.mainBundle).bundlePath;
+        var mainBundlePath = NSBundle.mainBundle.bundlePath;
         var resolvedPath = NSString.stringWithString(mainBundlePath).stringByResolvingSymlinksInPath;
         return resolvedPath;
     };
@@ -254,7 +254,7 @@ var FileSystemAccess = (function () {
         }
     };
     FileSystemAccess.prototype.getKnownPath = function (folderType) {
-        var fileManager = utils_1.ios.getter(NSFileManager, NSFileManager.defaultManager);
+        var fileManager = NSFileManager.defaultManager;
         var paths = fileManager.URLsForDirectoryInDomains(folderType, 1);
         var url = paths.objectAtIndex(0);
         return url.path;
@@ -267,7 +267,7 @@ var FileSystemAccess = (function () {
         return "";
     };
     FileSystemAccess.prototype.deleteEntity = function (path, onError) {
-        var fileManager = utils_1.ios.getter(NSFileManager, NSFileManager.defaultManager);
+        var fileManager = NSFileManager.defaultManager;
         try {
             fileManager.removeItemAtPathError(path);
         }
@@ -279,7 +279,7 @@ var FileSystemAccess = (function () {
     };
     FileSystemAccess.prototype.enumEntities = function (path, callback, onError) {
         try {
-            var fileManager = utils_1.ios.getter(NSFileManager, NSFileManager.defaultManager);
+            var fileManager = NSFileManager.defaultManager;
             var files = void 0;
             try {
                 files = fileManager.contentsOfDirectoryAtPathError(path);

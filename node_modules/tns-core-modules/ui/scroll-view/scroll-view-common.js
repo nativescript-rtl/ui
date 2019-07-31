@@ -102,4 +102,9 @@ exports.scrollBarIndicatorVisibleProperty = new content_view_1.Property({
     valueConverter: content_view_1.booleanConverter
 });
 exports.scrollBarIndicatorVisibleProperty.register(ScrollViewBase);
+exports.isScrollEnabledProperty = new content_view_1.Property({
+    name: "isScrollEnabled", defaultValue: true,
+    valueConverter: content_view_1.booleanConverter
+});
+exports.isScrollEnabledProperty.register(ScrollViewBase);
 //# sourceMappingURL=scroll-view-common.js.map

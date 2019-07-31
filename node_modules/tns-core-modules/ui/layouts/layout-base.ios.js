@@ -35,6 +35,9 @@ var LayoutBase = (function (_super) {
     LayoutBase.prototype[layout_base_common_1.clipToBoundsProperty.setNative] = function (value) {
         this._setNativeClipToBounds();
     };
+    LayoutBase.prototype[layout_base_common_1.isPassThroughParentEnabledProperty.setNative] = function (value) {
+        this.nativeViewProtected.setPassThroughParent(value);
+    };
     return LayoutBase;
 }(layout_base_common_1.LayoutBaseCommon));
 exports.LayoutBase = LayoutBase;

@@ -5,7 +5,7 @@ var WrappedValue = (function () {
         this.wrapped = wrapped;
     }
     WrappedValue.unwrap = function (value) {
-        return (value && value.wrapped) ? value.wrapped : value;
+        return (value instanceof WrappedValue) ? value.wrapped : value;
     };
     WrappedValue.wrap = function (value) {
         var w = _wrappedValues[_wrappedIndex++ % 5];

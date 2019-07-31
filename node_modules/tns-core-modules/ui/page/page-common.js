@@ -101,6 +101,12 @@ var PageBase = (function (_super) {
     };
     PageBase.prototype.onNavigatingTo = function (context, isBackNavigation, bindingContext) {
         this._navigationContext = context;
+        if (isBackNavigation && this._styleScope) {
+            this._styleScope.ensureSelectors();
+            if (!this._cssState.isSelectorsLatestVersionApplied()) {
+                this._onCssStateChange();
+            }
+        }
         if (!isBackNavigation && bindingContext !== undefined && bindingContext !== null) {
             this.bindingContext = bindingContext;
         }

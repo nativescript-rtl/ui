@@ -1,5 +1,4 @@
 Object.defineProperty(exports, "__esModule", { value: true });
-var utils = require("../utils/utils");
 var FrameHandlerImpl = (function (_super) {
     __extends(FrameHandlerImpl, _super);
     function FrameHandlerImpl() {
@@ -27,8 +26,8 @@ var FPSCallback = (function () {
         this.impl = FrameHandlerImpl.initWithOwner(new WeakRef(this));
         this.displayLink = CADisplayLink.displayLinkWithTargetSelector(this.impl, "handleFrame");
         this.displayLink.paused = true;
-        this.displayLink.addToRunLoopForMode(utils.ios.getter(NSRunLoop, NSRunLoop.currentRunLoop), NSDefaultRunLoopMode);
-        this.displayLink.addToRunLoopForMode(utils.ios.getter(NSRunLoop, NSRunLoop.currentRunLoop), UITrackingRunLoopMode);
+        this.displayLink.addToRunLoopForMode(NSRunLoop.currentRunLoop, NSDefaultRunLoopMode);
+        this.displayLink.addToRunLoopForMode(NSRunLoop.currentRunLoop, UITrackingRunLoopMode);
     }
     FPSCallback.prototype.start = function () {
         if (this.running) {

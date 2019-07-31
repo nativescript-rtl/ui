@@ -23,9 +23,11 @@ function getHandlerForEventName(eventName) {
                 return;
             }
             var deadPairsIndexes = [];
+            var pair;
+            var target;
             for (var i = 0; i < targetHandlerPairList.length; i++) {
-                var pair = targetHandlerPairList[i];
-                var target = pair.tagetRef.get();
+                pair = targetHandlerPairList[i];
+                target = pair.tagetRef.get();
                 if (target) {
                     pair.handler.call(target, eventData);
                 }
@@ -97,9 +99,11 @@ function removeWeakEventListener(source, eventName, handler, target) {
         return;
     }
     var targetHandlerPairsToRemove = [];
+    var pair;
+    var registeredTarget;
     for (var i = 0; i < targetHandlerPairList.length; i++) {
-        var pair = targetHandlerPairList[i];
-        var registeredTarget = pair.tagetRef.get();
+        pair = targetHandlerPairList[i];
+        registeredTarget = pair.tagetRef.get();
         if (!registeredTarget || (registeredTarget === target && handler === pair.handler)) {
             targetHandlerPairsToRemove.push(i);
         }

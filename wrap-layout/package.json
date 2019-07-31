@@ -2,7 +2,7 @@
     "name": "wrap-layout",
     "version": "1.0.0",
     "description": "Add right-to-left support to NativeScript framework.",
-    "main": "wrap-layout",
+    "main": "wrap-layout.js",
     "typings": "index.d.ts",
     "nativescript": {
         "platforms": {

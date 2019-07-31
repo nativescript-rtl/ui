@@ -28,17 +28,26 @@ var SliderChangeHandlerImpl = (function (_super) {
 var Slider = (function (_super) {
     __extends(Slider, _super);
     function Slider() {
-        var _this = _super.call(this) || this;
-        _this.nativeViewProtected = _this._ios = UISlider.new();
-        _this._ios.minimumValue = 0;
-        _this._ios.maximumValue = _this.maxValue;
-        _this._changeHandler = SliderChangeHandlerImpl.initWithOwner(new WeakRef(_this));
-        _this._ios.addTargetActionForControlEvents(_this._changeHandler, "sliderValueChanged", 4096);
-        return _this;
+        return _super !== null && _super.apply(this, arguments) || this;
     }
+    Slider.prototype.createNativeView = function () {
+        return UISlider.new();
+    };
+    Slider.prototype.initNativeView = function () {
+        _super.prototype.initNativeView.call(this);
+        var nativeView = this.nativeViewProtected;
+        nativeView.minimumValue = 0;
+        nativeView.maximumValue = this.maxValue;
+        this._changeHandler = SliderChangeHandlerImpl.initWithOwner(new WeakRef(this));
+        nativeView.addTargetActionForControlEvents(this._changeHandler, "sliderValueChanged", 4096);
+    };
+    Slider.prototype.disposeNativeView = function () {
+        this._changeHandler = null;
+        _super.prototype.disposeNativeView.call(this);
+    };
     Object.defineProperty(Slider.prototype, "ios", {
         get: function () {
-            return this._ios;
+            return this.nativeViewProtected;
         },
         enumerable: true,
         configurable: true
@@ -47,33 +56,33 @@ var Slider = (function (_super) {
         return 0;
     };
     Slider.prototype[slider_common_1.valueProperty.setNative] = function (value) {
-        this._ios.value = value;
+        this.ios.value = value;
     };
     Slider.prototype[slider_common_1.minValueProperty.getDefault] = function () {
         return 0;
     };
     Slider.prototype[slider_common_1.minValueProperty.setNative] = function (value) {
-        this._ios.minimumValue = value;
+        this.ios.minimumValue = value;
     };
     Slider.prototype[slider_common_1.maxValueProperty.getDefault] = function () {
         return 100;
     };
     Slider.prototype[slider_common_1.maxValueProperty.setNative] = function (value) {
-        this._ios.maximumValue = value;
+        this.ios.maximumValue = value;
     };
     Slider.prototype[slider_common_1.colorProperty.getDefault] = function () {
-        return this._ios.thumbTintColor;
+        return this.ios.thumbTintColor;
     };
     Slider.prototype[slider_common_1.colorProperty.setNative] = function (value) {
         var color = value instanceof slider_common_1.Color ? value.ios : value;
-        this._ios.thumbTintColor = color;
+        this.ios.thumbTintColor = color;
     };
     Slider.prototype[slider_common_1.backgroundColorProperty.getDefault] = function () {
-        return this._ios.minimumTrackTintColor;
+        return this.ios.minimumTrackTintColor;
     };
     Slider.prototype[slider_common_1.backgroundColorProperty.setNative] = function (value) {
         var color = value instanceof slider_common_1.Color ? value.ios : value;
-        this._ios.minimumTrackTintColor = color;
+        this.ios.minimumTrackTintColor = color;
     };
     Slider.prototype[slider_common_1.backgroundInternalProperty.getDefault] = function () {
         return null;

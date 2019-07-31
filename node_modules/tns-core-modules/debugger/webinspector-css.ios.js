@@ -7,6 +7,7 @@ var CSSDomainDebugger = (function () {
         this.events = new inspectorCommands.CSSDomain.CSSFrontend();
         this.commands = {};
         devtools_elements_1.attachCSSInspectorCommandCallbacks(this.commands);
+        this.enable();
     }
     Object.defineProperty(CSSDomainDebugger.prototype, "enabled", {
         get: function () {

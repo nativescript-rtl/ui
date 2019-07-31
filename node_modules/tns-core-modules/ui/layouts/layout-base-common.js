@@ -148,4 +148,6 @@ var LayoutBaseCommon = (function (_super) {
 exports.LayoutBaseCommon = LayoutBaseCommon;
 exports.clipToBoundsProperty = new view_1.Property({ name: "clipToBounds", defaultValue: true, valueConverter: view_1.booleanConverter });
 exports.clipToBoundsProperty.register(LayoutBaseCommon);
+exports.isPassThroughParentEnabledProperty = new view_1.Property({ name: "isPassThroughParentEnabled", defaultValue: false, valueConverter: view_1.booleanConverter });
+exports.isPassThroughParentEnabledProperty.register(LayoutBaseCommon);
 //# sourceMappingURL=layout-base-common.js.map

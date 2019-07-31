@@ -6,7 +6,6 @@ var font_common_1 = require("./font-common");
 var trace_1 = require("../../trace");
 var platform_1 = require("../../platform");
 var fs = require("../../file-system");
-var utils = require("../../utils/utils");
 __export(require("./font-common"));
 var EMULATE_OBLIQUE = true;
 var OBLIQUE_TRANSFORM = CGAffineTransformMake(1, 0, 0.2, 1, 0, 0);
@@ -92,7 +91,7 @@ function getNativeFontWeight(fontWeight) {
 function getSystemFont(size, nativeWeight, italic, symbolicTraits) {
     var result = UIFont.systemFontOfSizeWeight(size, nativeWeight);
     if (italic) {
-        var descriptor = utils.ios.getter(result, result.fontDescriptor).fontDescriptorWithSymbolicTraits(symbolicTraits);
+        var descriptor = result.fontDescriptor.fontDescriptorWithSymbolicTraits(symbolicTraits);
         result = UIFont.fontWithDescriptorSize(descriptor, size);
     }
     return result;
@@ -129,7 +128,7 @@ function createUIFont(font, defaultFont) {
                 _b);
             var descriptor = UIFontDescriptor.fontDescriptorWithFontAttributes(fontAttributes);
             result = UIFont.fontWithDescriptorSize(descriptor, size);
-            var actualItalic = utils.ios.getter(result, result.fontDescriptor).symbolicTraits & 1;
+            var actualItalic = result.fontDescriptor.symbolicTraits & 1;
             if (font.isItalic && !actualItalic && EMULATE_OBLIQUE) {
                 descriptor = descriptor.fontDescriptorWithMatrix(OBLIQUE_TRANSFORM);
                 result = UIFont.fontWithDescriptorSize(descriptor, size);
@@ -154,7 +153,7 @@ var ios;
         if (!fs.File.exists(filePath)) {
             filePath = fs.path.join(fs.knownFolders.currentApp().path, fontFile);
         }
-        var fontData = utils.ios.getter(NSFileManager, NSFileManager.defaultManager).contentsAtPath(filePath);
+        var fontData = NSFileManager.defaultManager.contentsAtPath(filePath);
         if (!fontData) {
             throw new Error("Could not load font from: " + fontFile);
         }

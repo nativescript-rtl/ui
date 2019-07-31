@@ -1,55 +1,50 @@
 {
-  "name": "@nativescript-rtl/ui",
-  "version": "0.1.0",
-  "description": "Add right-to-left support to NativeScript framework",
-  "main": "main.js",
-  "typings": "main.d.ts",
-  "nativescript": {
-    "platforms": {
-        "android": "4.0.0",
-        "ios": "4.0.0"
+    "name": "@nativescript-rtl/ui",
+    "version": "0.1.1",
+    "description": "Add right-to-left support to NativeScript framework",
+    "main": "main.js",
+    "typings": "main.d.ts",
+    "nativescript": {
+        "platforms": {
+            "android": "6.0.0",
+            "ios": "6.0.1"
+        }
+    },
+    "keywords": [
+        "rtt",
+        "nativescript",
+        "ui",
+        "tns",
+        "gridlayout",
+        "flexboxlayout",
+        "warplayout",
+        "layout"
+    ],
+    "scripts": {
+        "tsc": "npm i && tsc",
+        "build": "npm run tsc && npm run build.native",
+        "build.native": "node scripts/build-native.js",
+        "postclone": "npm i && node scripts/postclone.js",
+        "tslint": "cd .. && tslint \"**/*.ts\" --config tslint.json --exclude \"**/node_modules/**\"",
+        "ci.tslint": "npm i && tslint '**/*.ts' --config '../tslint.json' --exclude '**/node_modules/**' --exclude '**/platforms/**'",
+        "demo.ios": "npm run tsc && cd ../demo && tns run ios --emulator",
+        "demo.android": "npm run tsc && cd ../demo && tns run android --emulator",
+        "demo.reset": "cd ../demo && npx rimraf -- hooks node_modules platforms package-lock.json",
+        "prepack": "npm run build.native"
+    },
+    "devDependencies": {
+        "tns-core-modules": "^6.0.0",
+        "tns-platform-declarations": "^6.0.0",
+        "typescript": "~3.4.5",
+        "prompt": "^1.0.0",
+        "rimraf": "^2.6.3",
+        "tslint": "^5.12.1",
+        "semver": "^5.6.0"
+    },
+    "homepage": "https://github.com/nativescript-rtl/ui",
+    "author": "xlmnxp",
+    "license": "MIT",
+    "publishConfig": {
+        "access": "public"
     }
-  },
-  "keywords": [
-    "rtt",
-    "nativescript",
-    "ui",
-    "tns",
-    "gridlayout",
-    "flexboxlayout",
-    "warplayout",
-    "layout"
-  ],
-  "scripts": {
-      "tsc": "tsc",
-      "build": "npm run tsc && npm run build.native",
-      "build.native": "node scripts/build-native.js",
-      "postclone": "npm i && node scripts/postclone.js && cd ../demo && npm i && npx rimraf -- package-lock.json && cd ../src",
-      "test.android": "npm run tsc && npm run tslint && cd ../demo && tns build android && tns test android --justlaunch",
-      "test.ios": "npm run tsc && npm run tslint && cd ../demo && tns build ios && tns test ios --justlaunch",
-      "tslint": "cd .. && tslint \"**/*.ts\" --config tslint.json --exclude \"**/node_modules/**\"",
-      "plugin.tscwatch": "npm run tsc -- -w",
-      "demo.ios": "npm run tsc && cd ../demo && tns run ios --syncAllFiles --emulator",
-      "demo.android": "npm run tsc && cd ../demo && tns run android --syncAllFiles --emulator",
-      "demo.reset": "cd ../demo && npx rimraf -- hooks node_modules platforms package-lock.json",
-      "prepare": "npm run build && cd ../demo && npm uninstall @nativescript-rtl/ui && npm install ../ui",
-      "clean": "npm run demo.reset && npx rimraf -- node_modules package-lock.json && npm i",
-      "ci.tslint": "npm i && tslint '**/*.ts' --config '../tslint.json' --exclude '**/node_modules/**'",
-      "prepack": "npm run build.native"
-  },
-  "devDependencies": {
-    "tns-core-modules": "^4.2.0",
-    "tns-platform-declarations": "^4.2.0",
-    "typescript": "~2.8.2",
-    "prompt": "^1.0.0",
-    "rimraf": "^2.6.2",
-    "tslint": "^5.11.0",
-    "semver": "^5.5.0"
-  },
-  "homepage": "https://github.com/nativescript-rtl/ui",
-  "author": "xlmnxp",
-  "license": "MIT",
-  "publishConfig": {
-    "access": "public"
-  }
 }
