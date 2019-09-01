@@ -1,13 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var grid_layout_1 = require("./grid-layout");
-exports.GridLayout = grid_layout_1.GridLayout;
-var wrap_layout_1 = require("./wrap-layout");
-exports.WrapLayout = wrap_layout_1.WrapLayout;
-var absolute_layout_1 = require("./absolute-layout");
-exports.AbsoluteLayout = absolute_layout_1.AbsoluteLayout;
-var dock_layout_1 = require("./dock-layout");
-exports.DockLayout = dock_layout_1.DockLayout;
-var stack_layout_1 = require("./stack-layout");
-exports.StackLayout = stack_layout_1.StackLayout;
+var page_1 = require("tns-core-modules/ui/page/page");
+if (page_1.isAndroid) {
+    exports.GridLayout = require("./grid-layout/grid-layout.android").GridLayout;
+    exports.WrapLayout = require("./wrap-layout/wrap-layout.android").WrapLayout;
+    exports.AbsoluteLayout = require("./absolute-layout/absolute-layout.android").AbsoluteLayout;
+    exports.DockLayout = require("./dock-layout/dock-layout.android").DockLayout;
+    exports.StackLayout = require("./stack-layout/stack-layout.android").StackLayout;
+}
+else if (page_1.isIOS) {
+    exports.GridLayout = require("./grid-layout/grid-layout.ios").GridLayout;
+    exports.WrapLayout = require("./wrap-layout/wrap-layout.ios").WrapLayout;
+    exports.AbsoluteLayout = require("./absolute-layout/absolute-layout.ios").AbsoluteLayout;
+    exports.DockLayout = require("./dock-layout/dock-layout.ios").DockLayout;
+    exports.StackLayout = require("./stack-layout/stack-layout.ios").StackLayout;
+}
 //# sourceMappingURL=main.js.map
