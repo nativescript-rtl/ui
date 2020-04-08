@@ -45,7 +45,7 @@ var AbsoluteLayout = (function (_super) {
                 }
             }
             else {
-                _this.nativeViewProtected.setRotationY(0);
+                _this.nativeViewProtected.layer.transform = ZeroRotation;
                 for (var viewIndex = 0; viewIndex < _this["getChildrenCount"](); viewIndex++) {
                     var NSView = _this["getChildAt"](viewIndex);
                     NSView.nativeView.layer.transform = ZeroRotation;

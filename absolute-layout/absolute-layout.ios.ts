@@ -47,7 +47,7 @@ export class AbsoluteLayout extends Common {
           }
         }
       } else {
-        this.nativeViewProtected.setRotationY(0);
+        this.nativeViewProtected.layer.transform = ZeroRotation;
         for (
           let viewIndex = 0;
           viewIndex < this["getChildrenCount"]();
