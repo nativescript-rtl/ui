@@ -1,5 +1,6 @@
 import { Common, isRtlProperty } from "./grid-layout.common";
 import { View } from "tns-core-modules/ui/core/view/view";
+import { screen } from "tns-core-modules/platform";
 
 export class GridLayout extends Common {
   public initNativeView(): void {
@@ -33,6 +34,7 @@ export class GridLayout extends Common {
     setTimeout(() => {
       if (this.isRtl) {
         this.nativeViewProtected.layer.transform = RotationInYAxis180Deg;
+        this.nativeViewProtected.layer.rasterizationScale = screen.mainScreen.scale;
         for (
           let viewIndex = 0;
           viewIndex < this["getChildrenCount"]();
@@ -44,6 +46,7 @@ export class GridLayout extends Common {
             NSView.nativeView.layer.transform = ZeroRotation;
           } else {
             NSView.nativeView.layer.transform = RotationInYAxis180Deg;
+            this.nativeViewProtected.layer.rasterizationScale = screen.mainScreen.scale;
           }
         }
       } else {
