@@ -28,7 +28,7 @@ export class AbsoluteLayout extends Common {
   }
 
   private _updateDirection(): void {
-    let ZeroRotation = CGAffineTransformMakeRotation(0);
+    let ZeroRotation = CATransform3DRotate(CATransform3DIdentity, 0.0, 0.0, 0.0, 0.0);
     let RotationInYAxis180Deg = CATransform3DRotate(CATransform3DIdentity, (180 * Math.PI) / 180.0, 0.0, 1.0, 0.0);
 
     setTimeout(() => {
