@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var stack_layout_common_1 = require("./stack-layout.common");
+var platform_1 = require("tns-core-modules/platform");
 var StackLayout = (function (_super) {
     __extends(StackLayout, _super);
     function StackLayout() {
@@ -28,11 +29,12 @@ var StackLayout = (function (_super) {
     };
     StackLayout.prototype._updateDirection = function () {
         var _this = this;
-        var ZeroRotation = CGAffineTransformMakeRotation(0);
+        var ZeroRotation = CATransform3DRotate(CATransform3DIdentity, 0.0, 0.0, 0.0, 0.0);
         var RotationInYAxis180Deg = CATransform3DRotate(CATransform3DIdentity, (180 * Math.PI) / 180.0, 0.0, 1.0, 0.0);
         setTimeout(function () {
             if (_this.isRtl) {
                 _this.nativeViewProtected.layer.transform = RotationInYAxis180Deg;
+                _this.nativeViewProtected.layer.rasterizationScale = platform_1.screen.mainScreen.scale;
                 for (var viewIndex = 0; viewIndex < _this["getChildrenCount"](); viewIndex++) {
                     var NSView = _this["getChildAt"](viewIndex);
                     var isRtl = NSView["isRtl"] || false;
@@ -41,6 +43,7 @@ var StackLayout = (function (_super) {
                     }
                     else {
                         NSView.nativeView.layer.transform = RotationInYAxis180Deg;
+                        _this.nativeViewProtected.layer.rasterizationScale = platform_1.screen.mainScreen.scale;
                     }
                 }
             }

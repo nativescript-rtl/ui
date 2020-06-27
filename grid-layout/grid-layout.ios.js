@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var grid_layout_common_1 = require("./grid-layout.common");
+var platform_1 = require("tns-core-modules/platform");
 var GridLayout = (function (_super) {
     __extends(GridLayout, _super);
     function GridLayout() {
@@ -28,11 +29,12 @@ var GridLayout = (function (_super) {
     };
     GridLayout.prototype._updateDirection = function () {
         var _this = this;
-        var ZeroRotation = CGAffineTransformMakeRotation(0);
+        var ZeroRotation = CATransform3DRotate(CATransform3DIdentity, 0.0, 0.0, 0.0, 0.0);
         var RotationInYAxis180Deg = CATransform3DRotate(CATransform3DIdentity, (180 * Math.PI) / 180.0, 0.0, 1.0, 0.0);
         setTimeout(function () {
             if (_this.isRtl) {
                 _this.nativeViewProtected.layer.transform = RotationInYAxis180Deg;
+                _this.nativeViewProtected.layer.rasterizationScale = platform_1.screen.mainScreen.scale;
                 for (var viewIndex = 0; viewIndex < _this["getChildrenCount"](); viewIndex++) {
                     var NSView = _this["getChildAt"](viewIndex);
                     var isRtl = NSView["isRtl"] || false;
@@ -41,6 +43,7 @@ var GridLayout = (function (_super) {
                     }
                     else {
                         NSView.nativeView.layer.transform = RotationInYAxis180Deg;
+                        _this.nativeViewProtected.layer.rasterizationScale = platform_1.screen.mainScreen.scale;
                     }
                 }
             }
