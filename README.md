@@ -77,10 +77,11 @@ example:
   </RWrapLayout>
 ```
 Vue example and how to import elements:
-``js
-Vue.registerElement('RGridLayout', () => require('@nativescript-rtl/ui').GridLayout);
-Vue.registerElement('RWrapLayout', () => require('@nativescript-rtl/ui').WrapLayout);
-Vue.registerElement('RAbsoluteLayout', () => require('@nativescript-rtl/ui').AbsoluteLayout);
-Vue.registerElement('RDockLayout', () => require('@nativescript-rtl/ui').DockLayout);
-Vue.registerElement('RStackLayout', () => require('@nativescript-rtl/ui').StackLayout);
-``
+
+```js
+  Vue.registerElement('RGridLayout', () => require('@nativescript-rtl/ui').GridLayout);
+  Vue.registerElement('RWrapLayout', () => require('@nativescript-rtl/ui').WrapLayout);
+  Vue.registerElement('RAbsoluteLayout', () => require('@nativescript-rtl/ui').AbsoluteLayout);
+  Vue.registerElement('RDockLayout', () => require('@nativescript-rtl/ui').DockLayout);
+  Vue.registerElement('RStackLayout', () => require('@nativescript-rtl/ui').StackLayout);
+```
