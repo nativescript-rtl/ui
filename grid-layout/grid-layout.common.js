@@ -1,21 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.directionProperty = exports.isRtlProperty = exports.Common = void 0;
-var grid_layout_1 = require("@nativescript/core/ui/layouts/grid-layout");
-var ui_1 = require("@nativescript/core/ui");
-var Common = (function (_super) {
-    __extends(Common, _super);
-    function Common() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return Common;
-}(grid_layout_1.GridLayout));
+const grid_layout_1 = require("@nativescript/core/ui/layouts/grid-layout");
+const ui_1 = require("@nativescript/core/ui");
+class Common extends grid_layout_1.GridLayout {
+}
 exports.Common = Common;
 exports.isRtlProperty = new ui_1.Property({
     name: "isRtl",
     defaultValue: true,
-    valueConverter: function (v) {
-        var lowercase = (v + "").toLowerCase();
+    valueConverter(v) {
+        let lowercase = (v + "").toLowerCase();
         if (lowercase === "true") {
             return true;
         }
@@ -31,8 +26,8 @@ exports.directionProperty = new ui_1.CssProperty({
     cssName: "direction",
     defaultValue: "rtl",
     affectsLayout: true,
-    valueConverter: function (value) {
-        var val = value.toLocaleLowerCase();
+    valueConverter: (value) => {
+        const val = value.toLocaleLowerCase();
         if (val === "rtl" || val === "ltr") {
             return val;
         }

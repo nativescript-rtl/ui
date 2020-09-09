@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var platform_1 = require("@nativescript/core/platform");
+const platform_1 = require("@nativescript/core/platform");
 if (platform_1.isAndroid) {
     exports.GridLayout = require("./grid-layout/grid-layout.android").GridLayout;
     exports.WrapLayout = require("./wrap-layout/wrap-layout.android").WrapLayout;

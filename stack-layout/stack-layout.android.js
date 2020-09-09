@@ -1,21 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.StackLayout = void 0;
-var stack_layout_common_1 = require("./stack-layout.common");
-var StackLayout = (function (_super) {
-    __extends(StackLayout, _super);
-    function StackLayout() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    StackLayout.prototype.initNativeView = function () {
-        _super.prototype.initNativeView.call(this);
+const stack_layout_common_1 = require("./stack-layout.common");
+class StackLayout extends stack_layout_common_1.Common {
+    initNativeView() {
+        super.initNativeView();
         this._updateDirection();
-    };
-    StackLayout.prototype[stack_layout_common_1.isRtlProperty.setNative] = function (isRtl) {
+    }
+    [stack_layout_common_1.isRtlProperty.setNative](isRtl) {
         this.isRtl = isRtl;
         this._updateDirection();
-    };
-    StackLayout.prototype[stack_layout_common_1.directionProperty.setNative] = function (direction) {
+    }
+    [stack_layout_common_1.directionProperty.setNative](direction) {
         if (direction === "rtl") {
             this.isRtl = true;
         }
@@ -23,27 +19,26 @@ var StackLayout = (function (_super) {
             this.isRtl = false;
         }
         this._updateDirection();
-    };
-    StackLayout.prototype.addChild = function (view) {
-        _super.prototype.addChild.call(this, view);
+    }
+    addChild(view) {
+        super.addChild(view);
         if (view.nativeViewProtected) {
             this._updateDirection();
         }
-    };
-    StackLayout.prototype.removeChild = function (view) {
-        _super.prototype.removeChild.call(this, view);
+    }
+    removeChild(view) {
+        super.removeChild(view);
         if (view.nativeViewProtected) {
             this._updateDirection();
         }
-    };
-    StackLayout.prototype._updateDirection = function () {
-        var _this = this;
-        setTimeout(function () {
-            if (_this.isRtl) {
-                _this.nativeViewProtected.setRotationY(180);
-                for (var viewIndex = 0; viewIndex < _this["getChildrenCount"](); viewIndex++) {
-                    var NSView = _this["getChildAt"](viewIndex);
-                    var isRtl = NSView["isRtl"] || false;
+    }
+    _updateDirection() {
+        setTimeout(() => {
+            if (this.isRtl) {
+                this.nativeViewProtected.setRotationY(180);
+                for (let viewIndex = 0; viewIndex < this["getChildrenCount"](); viewIndex++) {
+                    let NSView = this["getChildAt"](viewIndex);
+                    let isRtl = NSView["isRtl"] || false;
                     if (isRtl) {
                         NSView.nativeView.setRotationY(0);
                     }
@@ -53,15 +48,14 @@ var StackLayout = (function (_super) {
                 }
             }
             else {
-                _this.nativeViewProtected.setRotationY(0);
-                for (var viewIndex = 0; viewIndex < _this["getChildrenCount"](); viewIndex++) {
-                    var NSView = _this["getChildAt"](viewIndex);
+                this.nativeViewProtected.setRotationY(0);
+                for (let viewIndex = 0; viewIndex < this["getChildrenCount"](); viewIndex++) {
+                    let NSView = this["getChildAt"](viewIndex);
                     NSView.nativeView.setRotationY(0);
                 }
             }
         }, 1);
-    };
-    return StackLayout;
-}(stack_layout_common_1.Common));
+    }
+}
 exports.StackLayout = StackLayout;
 //# sourceMappingURL=stack-layout.android.js.map

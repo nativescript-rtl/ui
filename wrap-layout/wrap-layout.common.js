@@ -1,21 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.directionProperty = exports.isRtlProperty = exports.Common = void 0;
-var wrap_layout_1 = require("@nativescript/core/ui/layouts/wrap-layout");
-var ui_1 = require("@nativescript/core/ui");
-var Common = (function (_super) {
-    __extends(Common, _super);
-    function Common() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return Common;
-}(wrap_layout_1.WrapLayout));
+const wrap_layout_1 = require("@nativescript/core/ui/layouts/wrap-layout");
+const ui_1 = require("@nativescript/core/ui");
+class Common extends wrap_layout_1.WrapLayout {
+}
 exports.Common = Common;
 exports.isRtlProperty = new ui_1.Property({
     name: "isRtl",
     defaultValue: true,
-    valueConverter: function (v) {
-        var lowercase = (v + "").toLowerCase();
+    valueConverter(v) {
+        let lowercase = (v + "").toLowerCase();
         if (lowercase === "true") {
             return true;
         }
@@ -30,8 +25,8 @@ exports.directionProperty = new ui_1.CssProperty({
     name: "direction",
     cssName: "direction",
     defaultValue: "rtl",
-    valueConverter: function (value) {
-        var val = value.toLocaleLowerCase();
+    valueConverter: (value) => {
+        const val = value.toLocaleLowerCase();
         if (val === "rtl" || val === "ltr") {
             return val;
         }
