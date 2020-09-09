@@ -1,5 +1,5 @@
 import { Common } from "./wrap-layout.common";
-import { View } from "tns-core-modules/ui/page/page";
+import { View } from "@nativescript/core/ui";
 export * from "./wrap-layout.common";
 export declare class WrapLayout extends Common {
     initNativeView(): void;

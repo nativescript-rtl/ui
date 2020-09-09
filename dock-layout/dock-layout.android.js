@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.DockLayout = void 0;
 var dock_layout_common_1 = require("./dock-layout.common");
 var DockLayout = (function (_super) {
     __extends(DockLayout, _super);

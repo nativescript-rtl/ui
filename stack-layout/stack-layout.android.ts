@@ -1,5 +1,5 @@
 import { Common, isRtlProperty, directionProperty } from "./stack-layout.common";
-import { View } from "tns-core-modules/ui/page/page";
+import { View } from "@nativescript/core/ui";
 
 export class StackLayout extends Common {
   public initNativeView(): void {

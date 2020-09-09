@@ -1,9 +1,16 @@
 # @nativescript-rtl/ui
 Add right-to-left UI support to NativeScript framework
+
 ## Installation
 to install plugin write:
+### NativeScript 7 and higher
 ```bash
 tns plugin add @nativescript-rtl/ui
+```
+
+### Support NativeScript older then version 7
+```bash
+tns plugin add @nativescript-rtl/ui@0.1.7
 ```
 
 ## Preview

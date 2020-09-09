@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var grid_layout_1 = require("tns-core-modules/ui/layouts/grid-layout");
-var properties_1 = require("tns-core-modules/ui/core/properties/properties");
+exports.directionProperty = exports.isRtlProperty = exports.Common = void 0;
+var grid_layout_1 = require("@nativescript/core/ui/layouts/grid-layout");
+var ui_1 = require("@nativescript/core/ui");
 var Common = (function (_super) {
     __extends(Common, _super);
     function Common() {
@@ -10,7 +11,7 @@ var Common = (function (_super) {
     return Common;
 }(grid_layout_1.GridLayout));
 exports.Common = Common;
-exports.isRtlProperty = new properties_1.Property({
+exports.isRtlProperty = new ui_1.Property({
     name: "isRtl",
     defaultValue: true,
     valueConverter: function (v) {
@@ -25,10 +26,11 @@ exports.isRtlProperty = new properties_1.Property({
     }
 });
 exports.isRtlProperty.register(Common);
-exports.directionProperty = new properties_1.CssProperty({
+exports.directionProperty = new ui_1.CssProperty({
     name: "direction",
     cssName: "direction",
     defaultValue: "rtl",
+    affectsLayout: true,
     valueConverter: function (value) {
         var val = value.toLocaleLowerCase();
         if (val === "rtl" || val === "ltr") {
@@ -37,5 +39,5 @@ exports.directionProperty = new properties_1.CssProperty({
         throw new Error("Invalid string: " + val);
     }
 });
-exports.directionProperty.register(properties_1.Style);
+exports.directionProperty.register(ui_1.Style);
 //# sourceMappingURL=grid-layout.common.js.map

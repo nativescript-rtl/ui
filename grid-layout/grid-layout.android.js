@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.GridLayout = void 0;
 var grid_layout_common_1 = require("./grid-layout.common");
 var GridLayout = (function (_super) {
     __extends(GridLayout, _super);
@@ -15,6 +16,7 @@ var GridLayout = (function (_super) {
         this._updateDirection();
     };
     GridLayout.prototype[grid_layout_common_1.directionProperty.setNative] = function (direction) {
+        console.log("I called!");
         if (direction === "rtl") {
             this.isRtl = true;
         }

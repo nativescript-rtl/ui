@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.StackLayout = void 0;
 var stack_layout_common_1 = require("./stack-layout.common");
-var platform_1 = require("tns-core-modules/platform");
+var platform_1 = require("@nativescript/core/platform");
 var StackLayout = (function (_super) {
     __extends(StackLayout, _super);
     function StackLayout() {
@@ -34,7 +35,7 @@ var StackLayout = (function (_super) {
         setTimeout(function () {
             if (_this.isRtl) {
                 _this.nativeViewProtected.layer.transform = RotationInYAxis180Deg;
-                _this.nativeViewProtected.layer.rasterizationScale = platform_1.screen.mainScreen.scale;
+                _this.nativeViewProtected.layer.rasterizationScale = platform_1.Screen.mainScreen.scale;
                 for (var viewIndex = 0; viewIndex < _this["getChildrenCount"](); viewIndex++) {
                     var NSView = _this["getChildAt"](viewIndex);
                     var isRtl = NSView["isRtl"] || false;
@@ -43,7 +44,7 @@ var StackLayout = (function (_super) {
                     }
                     else {
                         NSView.nativeView.layer.transform = RotationInYAxis180Deg;
-                        _this.nativeViewProtected.layer.rasterizationScale = platform_1.screen.mainScreen.scale;
+                        _this.nativeViewProtected.layer.rasterizationScale = platform_1.Screen.mainScreen.scale;
                     }
                 }
             }

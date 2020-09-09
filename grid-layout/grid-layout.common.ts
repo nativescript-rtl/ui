@@ -1,9 +1,9 @@
-import { GridLayout } from "tns-core-modules/ui/layouts/grid-layout";
+import { GridLayout } from "@nativescript/core/ui/layouts/grid-layout";
 import {
   Property,
   CssProperty,
   Style
-} from "tns-core-modules/ui/core/properties/properties";
+} from "@nativescript/core/ui";
 
 export class Common extends GridLayout {
   public isRtl: boolean;
@@ -29,6 +29,7 @@ export const directionProperty = new CssProperty<Style, string>({
   name: "direction",
   cssName: "direction",
   defaultValue: "rtl",
+  affectsLayout: true,
   valueConverter: (value: string) => {
     const val = value.toLocaleLowerCase();
     if (val === "rtl" || val === "ltr") {

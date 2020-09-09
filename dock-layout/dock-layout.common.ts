@@ -1,5 +1,5 @@
-import { DockLayout } from "tns-core-modules/ui/layouts/dock-layout";
-import { Property, CssProperty, Style } from "tns-core-modules/ui/core/properties/properties";
+import { DockLayout } from "@nativescript/core/ui/layouts/dock-layout";
+import { Property, CssProperty, Style } from "@nativescript/core/ui";
 
 export class Common extends DockLayout {
     public isRtl: boolean;

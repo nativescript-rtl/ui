@@ -1,5 +1,5 @@
-import { GridLayout } from "tns-core-modules/ui/layouts/grid-layout";
-import { Property, CssProperty, Style } from "tns-core-modules/ui/core/properties/properties";
+import { GridLayout } from "@nativescript/core/ui/layouts/grid-layout";
+import { Property, CssProperty, Style } from "@nativescript/core/ui";
 export declare class Common extends GridLayout {
     isRtl: boolean;
 }

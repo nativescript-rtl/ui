@@ -1,6 +1,6 @@
 import { Common, isRtlProperty } from "./dock-layout.common";
-import { View } from "tns-core-modules/ui/core/view/view";
-import { screen } from "tns-core-modules/platform";
+import { View } from "@nativescript/core/ui";
+import { Screen } from "@nativescript/core/platform";
 
 export class DockLayout extends Common {
   public initNativeView(): void {
@@ -34,7 +34,7 @@ export class DockLayout extends Common {
     setTimeout(() => {
       if (this.isRtl) {
         this.nativeViewProtected.layer.transform = RotationInYAxis180Deg;
-        this.nativeViewProtected.layer.rasterizationScale = screen.mainScreen.scale;
+        this.nativeViewProtected.layer.rasterizationScale = Screen.mainScreen.scale;
         for (
           let viewIndex = 0;
           viewIndex < this["getChildrenCount"]();
@@ -46,7 +46,7 @@ export class DockLayout extends Common {
             NSView.nativeView.layer.transform = ZeroRotation;
           } else {
             NSView.nativeView.layer.transform = RotationInYAxis180Deg;
-            this.nativeViewProtected.layer.rasterizationScale = screen.mainScreen.scale;
+            this.nativeViewProtected.layer.rasterizationScale = Screen.mainScreen.scale;
           }
         }
       } else {

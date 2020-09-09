@@ -1,6 +1,5 @@
 import { Common, isRtlProperty, directionProperty } from "./grid-layout.common";
-import { View } from "tns-core-modules/ui/page/page";
-
+import { View } from "@nativescript/core/ui";
 export class GridLayout extends Common {
   public initNativeView(): void {
     super.initNativeView();
@@ -13,6 +12,7 @@ export class GridLayout extends Common {
   }
 
   [directionProperty.setNative](direction: string) {
+    console.log("I called!");
     if (direction === "rtl") {
       this.isRtl = true;
     } else if (direction === "ltr") {

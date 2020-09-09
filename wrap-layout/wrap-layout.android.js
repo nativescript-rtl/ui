@@ -1,10 +1,8 @@
 "use strict";
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.WrapLayout = void 0;
 var wrap_layout_common_1 = require("./wrap-layout.common");
-__export(require("./wrap-layout.common"));
+__exportStar(require("./wrap-layout.common"), exports);
 var WrapLayout = (function (_super) {
     __extends(WrapLayout, _super);
     function WrapLayout() {

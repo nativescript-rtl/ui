@@ -1,5 +1,5 @@
-import { WrapLayout } from "tns-core-modules/ui/layouts/wrap-layout";
-import { Property, CssProperty, Style } from "tns-core-modules/ui/core/properties/properties";
+import { WrapLayout } from "@nativescript/core/ui/layouts/wrap-layout";
+import { Property, CssProperty, Style } from "@nativescript/core/ui";
 export declare class Common extends WrapLayout {
     isRtl: boolean;
 }

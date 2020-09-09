@@ -1,5 +1,5 @@
-import { AbsoluteLayout } from "tns-core-modules/ui/layouts/absolute-layout";
-import { Property, CssProperty, Style } from "tns-core-modules/ui/core/properties/properties";
+import { AbsoluteLayout } from "@nativescript/core/ui/layouts/absolute-layout";
+import { Property, CssProperty, Style } from "@nativescript/core/ui";
 
 export class Common extends AbsoluteLayout {
   public isRtl: boolean;

@@ -1,4 +1,4 @@
-import { isAndroid, isIOS } from "tns-core-modules/ui/page/page";
+import { isAndroid, isIOS } from "@nativescript/core/platform";
 
 if(isAndroid) {
     exports.GridLayout = require("./grid-layout/grid-layout.android").GridLayout;

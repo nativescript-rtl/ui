@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.StackLayout = void 0;
 var stack_layout_common_1 = require("./stack-layout.common");
 var StackLayout = (function (_super) {
     __extends(StackLayout, _super);

@@ -1,5 +1,5 @@
-import { StackLayout } from "tns-core-modules/ui/layouts/stack-layout";
-import { Property, CssProperty, Style } from "tns-core-modules/ui/core/properties/properties";
+import { StackLayout } from "@nativescript/core/ui/layouts/stack-layout";
+import { Property, CssProperty, Style } from "@nativescript/core/ui";
 export declare class Common extends StackLayout {
     isRtl: boolean;
 }

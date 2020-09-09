@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.AbsoluteLayout = void 0;
 var absolute_layout_common_1 = require("./absolute-layout.common");
 var AbsoluteLayout = (function (_super) {
     __extends(AbsoluteLayout, _super);

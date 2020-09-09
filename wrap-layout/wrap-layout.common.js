@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var wrap_layout_1 = require("tns-core-modules/ui/layouts/wrap-layout");
-var properties_1 = require("tns-core-modules/ui/core/properties/properties");
+exports.directionProperty = exports.isRtlProperty = exports.Common = void 0;
+var wrap_layout_1 = require("@nativescript/core/ui/layouts/wrap-layout");
+var ui_1 = require("@nativescript/core/ui");
 var Common = (function (_super) {
     __extends(Common, _super);
     function Common() {
@@ -10,7 +11,7 @@ var Common = (function (_super) {
     return Common;
 }(wrap_layout_1.WrapLayout));
 exports.Common = Common;
-exports.isRtlProperty = new properties_1.Property({
+exports.isRtlProperty = new ui_1.Property({
     name: "isRtl",
     defaultValue: true,
     valueConverter: function (v) {
@@ -25,7 +26,7 @@ exports.isRtlProperty = new properties_1.Property({
     }
 });
 exports.isRtlProperty.register(Common);
-exports.directionProperty = new properties_1.CssProperty({
+exports.directionProperty = new ui_1.CssProperty({
     name: "direction",
     cssName: "direction",
     defaultValue: "rtl",
@@ -37,5 +38,5 @@ exports.directionProperty = new properties_1.CssProperty({
         throw new Error("Invalid string: " + val);
     }
 });
-exports.directionProperty.register(properties_1.Style);
+exports.directionProperty.register(ui_1.Style);
 //# sourceMappingURL=wrap-layout.common.js.map
