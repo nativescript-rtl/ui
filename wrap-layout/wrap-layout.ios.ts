@@ -34,7 +34,6 @@ export class WrapLayout extends Common {
     setTimeout(() => {
       if (this.isRtl) {
         this.nativeViewProtected.layer.transform = RotationInYAxis180Deg;
-        this.nativeViewProtected.layer.rasterizationScale = Screen.mainScreen.scale;
         for (
           let viewIndex = 0;
           viewIndex < this["getChildrenCount"]();
@@ -46,9 +45,10 @@ export class WrapLayout extends Common {
             NSView.nativeView.layer.transform = ZeroRotation;
           } else {
             NSView.nativeView.layer.transform = RotationInYAxis180Deg;
-            this.nativeViewProtected.layer.rasterizationScale = Screen.mainScreen.scale;
           }
+          NSView.nativeViewProtected.layer.rasterizationScale = Screen.mainScreen.scale;
         }
+        this.nativeViewProtected.layer.rasterizationScale = Screen.mainScreen.scale;
       } else {
         this.nativeViewProtected.layer.transform = ZeroRotation;
         for (
@@ -58,6 +58,7 @@ export class WrapLayout extends Common {
         ) {
           let NSView: View = this["getChildAt"](viewIndex);
           NSView.nativeView.layer.transform = ZeroRotation;
+          NSView.nativeViewProtected.layer.rasterizationScale = Screen.mainScreen.scale;
         }
       }
     }, 1);
