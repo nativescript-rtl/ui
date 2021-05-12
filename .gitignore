@@ -6,4 +6,4 @@
 *.js.map
 *.log
 demo/platforms
-node_modules
+node_modules/
