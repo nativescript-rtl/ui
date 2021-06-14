@@ -39,15 +39,13 @@
         "rimraf": "^2.6.3",
         "semver": "^5.6.0",
         "tslint": "^5.12.1",
-        "typescript": "~3.4.5"
+        "typescript": "~3.4.5",
+        "@types/node": "^14.6.4"
     },
     "homepage": "https://github.com/nativescript-rtl/ui",
     "author": "xlmnxp",
     "license": "MIT",
     "publishConfig": {
         "access": "public"
-    },
-    "dependencies": {
-        "@types/node": "^14.6.4"
     }
 }
