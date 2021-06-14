@@ -7,3 +7,4 @@
 *.log
 demo/platforms
 node_modules/
+dist/
