@@ -3,6 +3,23 @@ import { Property, CssProperty, Style } from "@nativescript/core/ui";
 
 export class Common extends WrapLayout {
   public isRtl: boolean;
+  private _directionScheduled = false;
+  scheduleDirectionUpdate() {
+    if (this._directionScheduled) {
+      return;
+    }
+    this._directionScheduled = true;
+    setTimeout(() => {
+      this._directionScheduled = false;
+      if (!this.nativeViewProtected) {
+        return;
+      }
+      this._updateDirection();
+    }, 1);
+  }
+  protected _updateDirection() {
+    // overriden
+  };
 }
 
 export const isRtlProperty = new Property<Common, boolean>({
