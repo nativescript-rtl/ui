@@ -7,6 +7,23 @@ import {
 
 export class Common extends GridLayout {
   public isRtl: boolean;
+  private _directionScheduled = false;
+  scheduleDirectionUpdate() {
+    if (this._directionScheduled) {
+      return;
+    }
+    this._directionScheduled = true;
+    setTimeout(() => {
+      this._directionScheduled = false;
+      if (!this.nativeViewProtected) {
+        return;
+      }
+      this._updateDirection();
+    });
+  }
+  protected _updateDirection() {
+    // overriden
+  };
 }
 
 export const isRtlProperty = new Property<Common, boolean>({
